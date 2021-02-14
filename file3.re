@@ -1,4 +1,4 @@
-= pimousebook
+= file 3
 
 今日初めて，Re:VIEWの執筆環境を構築しました．
 

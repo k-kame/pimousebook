@@ -1,7 +1,9 @@
 PREDEF:
-
+  - preface.re
 CHAPS:
   - pimousebook.re
+  - file2.re
+  - file3.re
 
 APPENDIX:
 
