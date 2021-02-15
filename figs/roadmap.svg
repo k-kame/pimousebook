@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
+   sodipodi:docname="roadmap.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="265.86102"
+     inkscape:cy="886.40567"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-text-baseline="true"
+     inkscape:window-width="3840"
+     inkscape:window-height="2080"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid815" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="レイヤー 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="82.020836"
+       y="11.25"
+       id="text827"><tspan
+         sodipodi:role="line"
+         id="tspan825"
+         x="82.020836"
+         y="11.25"
+         style="stroke-width:0.26458332">シミュレータで</tspan><tspan
+         sodipodi:role="line"
+         x="82.020836"
+         y="14.981104"
+         style="stroke-width:0.26458332"
+         id="tspan829">制御プログラム開発</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.583333"
+       y="23.15625"
+       id="text833"><tspan
+         sodipodi:role="line"
+         id="tspan831"
+         x="10.583333"
+         y="23.15625"
+         style="stroke-width:0.26458332">Raspberry Pi Mouse の</tspan><tspan
+         sodipodi:role="line"
+         x="10.583333"
+         y="26.887354"
+         style="stroke-width:0.26458332"
+         id="tspan835">セットアップ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="10.583333"
+       y="37.708332"
+       id="text839"><tspan
+         sodipodi:role="line"
+         id="tspan837"
+         x="10.583333"
+         y="37.708332"
+         style="stroke-width:0.26458332">Raspberry Pi の</tspan><tspan
+         sodipodi:role="line"
+         x="10.583333"
+         y="41.439438"
+         style="stroke-width:0.26458332"
+         id="tspan841">セットアップ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="34.395832"
+       y="35.0625"
+       id="text845"><tspan
+         sodipodi:role="line"
+         id="tspan843"
+         x="34.395832"
+         y="35.0625"
+         style="stroke-width:0.26458332">ROSのセットアップ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="34.395832"
+       y="43"
+       id="text849"><tspan
+         sodipodi:role="line"
+         id="tspan847"
+         x="34.395832"
+         y="43"
+         style="stroke-width:0.26458332">Linux (ubuntu) の</tspan><tspan
+         sodipodi:role="line"
+         x="34.395832"
+         y="46.731106"
+         style="stroke-width:0.26458332"
+         id="tspan851">インストール</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="87.123512"
+       y="63.977684"
+       id="text827-4"><tspan
+         sodipodi:role="line"
+         x="87.123512"
+         y="63.977684"
+         style="stroke-width:0.26458332"
+         id="tspan876">github の設定</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="163.28572"
+       y="90.341499"
+       id="text849-7"><tspan
+         sodipodi:role="line"
+         id="tspan847-2"
+         x="163.28572"
+         y="90.341499"
+         style="stroke-width:0.26458332">Linux (ubuntu) の</tspan><tspan
+         sodipodi:role="line"
+         x="163.28572"
+         y="94.072601"
+         style="stroke-width:0.26458332"
+         id="tspan851-1">インストール</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="124.35416"
+       y="103.85416"
+       id="text849-7-2"><tspan
+         sodipodi:role="line"
+         id="tspan847-2-7"
+         x="124.35416"
+         y="103.85416"
+         style="stroke-width:0.26458332">WSL (ubuntu) の</tspan><tspan
+         sodipodi:role="line"
+         x="124.35416"
+         y="107.58527"
+         style="stroke-width:0.26458332"
+         id="tspan851-1-8">インストール</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="124.35416"
+       y="85.333321"
+       id="text924"><tspan
+         sodipodi:role="line"
+         id="tspan922"
+         x="124.35416"
+         y="85.333321"
+         style="stroke-width:0.26458332">Xの設定</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="125.6771"
+       y="91.947906"
+       id="text849-7-0"><tspan
+         sodipodi:role="line"
+         id="tspan847-2-8"
+         x="125.6771"
+         y="91.947906"
+         style="stroke-width:0.26458332">Linux (ubuntu) の</tspan><tspan
+         sodipodi:role="line"
+         x="125.6771"
+         y="95.679008"
+         style="stroke-width:0.26458332"
+         id="tspan851-1-0">インストール</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="82.020836"
+       y="27.125"
+       id="text849-7-28"><tspan
+         sodipodi:role="line"
+         id="tspan847-2-2"
+         x="82.020836"
+         y="27.125"
+         style="stroke-width:0.26458332">マウスシミュレータの</tspan><tspan
+         sodipodi:role="line"
+         x="82.020836"
+         y="30.856104"
+         style="stroke-width:0.26458332"
+         id="tspan851-1-7">インストール</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot968"
+       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.66666667px;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'sans-serif, Normal';font-stretch:normal;font-variant:normal;text-anchor:start;text-align:start;writing-mode:lr;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal"><flowRegion
+         id="flowRegion970"><rect
+           id="rect972"
+           width="40"
+           height="30"
+           x="415"
+           y="117.51968" /></flowRegion><flowPara
+         id="flowPara974"></flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="87.3125"
+       y="39.03125"
+       id="text845-4"><tspan
+         sodipodi:role="line"
+         id="tspan843-7"
+         x="87.3125"
+         y="39.03125"
+         style="stroke-width:0.26458332">ROSのセットアップ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="85.989586"
+       y="70.78125"
+       id="text996"><tspan
+         sodipodi:role="line"
+         id="tspan994"
+         x="85.989586"
+         y="70.78125"
+         style="stroke-width:0.26458332">Visual Studio Code の</tspan><tspan
+         sodipodi:role="line"
+         x="85.989586"
+         y="74.512352"
+         style="stroke-width:0.26458332"
+         id="tspan998">セットアップ</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="14.552083"
+       y="132.95833"
+       id="text1002"><tspan
+         sodipodi:role="line"
+         id="tspan1000"
+         x="14.552083"
+         y="132.95833"
+         style="stroke-width:0.26458332">実機サイド</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1004"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,-11.906249,36.909417)"><flowRegion
+         id="flowRegion1006"><rect
+           id="rect1008"
+           width="110.00001"
+           height="15.000006"
+           x="390"
+           y="347.51968" /></flowRegion><flowPara
+         id="flowPara1010">シミュレーターサイド</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1012"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,47.625011,-6.746843)"><flowRegion
+         id="flowRegion1014"><rect
+           id="rect1016"
+           width="85"
+           height="30"
+           x="305"
+           y="447.51968" /></flowRegion><flowPara
+         id="flowPara1018">PC は windows 10 派</flowPara></flowRoot>    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1032"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.66666698px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,92.604177,2.513573)"><flowRegion
+         id="flowRegion1034"><rect
+           id="rect1036"
+           width="75.000008"
+           height="15.000007"
+           x="280"
+           y="422.51968" /></flowRegion><flowPara
+         id="flowPara1044">PC は Linux派</flowPara></flowRoot>    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:2.82222223px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="11.90625"
+       y="9.927083"
+       id="text827-1"><tspan
+         sodipodi:role="line"
+         id="tspan825-9"
+         x="11.90625"
+         y="9.927083"
+         style="stroke-width:0.26458332">実機で</tspan><tspan
+         sodipodi:role="line"
+         x="11.90625"
+         y="13.658187"
+         style="stroke-width:0.26458332"
+         id="tspan829-6">制御プログラム開発</tspan></text>
+  </g>
+</svg>
