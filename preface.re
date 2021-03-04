@@ -102,12 +102,34 @@
  * WSLは勿論インストールします．
  * シミュレーション環境は，独立 GPU を積んでいなくても，そこそこの PC なら何とか動くらしいので，インストールしてみましょう（便利だと思ったら買えばいいのです買えば）．
 
-//footnote[buyraspi][ボード単体：約 6,000 円／スターターキット：約 7,000 円．別途モニタ，キーボード，マウス必要．@<href>{https://www.switch-science.com/, スイッチサイエンス} などで購入可能]
+//footnote[buyraspi][ボード単体：約 6,000 円／スターターキット：約 10,000 円．別途モニタ，キーボード，マウス必要．@<href>{https://www.switch-science.com/, スイッチサイエンス} などで購入可能]
 
 ただし，いきなり環境整備だけに勤しむのは普通の人には苦痛らしいので，徐々に構築することにします（著者は楽しいです）．
 
+//table[shoppinglist][必要なものリスト]{
+.	品名				単価		個数	小計		備考
+---------
+1	ノートPC			100,000		1		100,000		開発用@<fn>{devnote}
+2	Raspberry Pi 3 B+	10,000		1		10,000		スターターキット@<fn>{raspikit}
+3	USB メモリ (32G)	1,000		1		1,000				
+3	micro SD (32G)		1,000		1		1,000
+//}
+
+//footnote[devnote][micros SD カードが読めること．ノートが便利／独立GPUがあるとなおよい．]
+
+//footnote[raspikit][ケース，ACアダプタ，HDMIケーブル，micro SD (32G) 付き／別途キーボード，マウス，モニタが必要]
+
 == 開発 PC のセットアップ
+
+はじめに開発用 PC のセットアップをしますが（ROS のインストール），PC の環境で手順が違います．
+
+ 1. OS が windows 10 の人　　>  4.1 章 に進む
+ 2. OS が ubuntu の人　　　　> 4.2 章 に進む
+
 === windows 10 PC に WSL / ubuntu をインストール
+
+本節では，OS が windows 10 の PC に，ubuntu（Linux）と関連ソフトウェアをインストールし，Linux がインストールされている PC と同じ作業ができるようにします． 
+
 
 PC の OS が ubuntu の奇特な人はパス
 
@@ -119,6 +141,8 @@ PC の OS が ubuntu の奇特な人はパス
 
  * Windows Terminal（あると便利）
  * Visual Studio Code と拡張機能
+
+=== Visual Studio Code のインストール
 
 === ubuntu に ROS をインストール
 
