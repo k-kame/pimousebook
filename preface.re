@@ -208,6 +208,11 @@
  * ubuntu のインストールが終わったら，以下のコマンドで，package を最新にしておきましょう（結構時間がかかります）．
  ** @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  
+//image[fig_ubuntuex][fig_ubuntuex]{
+ubuntu のアイコン
+//}
+
+
 @<ami>{X Window System のインストール}
 
 X Window System（以下，X 或いは X11）とは，UNIX 系 OS で標準的に用いられるウィンドウシステムです．簡単に言うと，UNIX 系 OS を windows みたく「複数のウィンドウをマウスで操作」という操作形態を実現するために必要なシステムソフトウェアです．
@@ -254,10 +259,67 @@ X の動作試験（X サーバー対応アプリをインストール／実行�
  * @<code>{xeyes}
 目玉がでたらOK
 
-=== Visual Studio Code のインストール
+=== 関連するソフトウェアのインストール
+
+==== Visual Studio Code のインストール
+
+@<ami>{windows 編}
+　
+ * @<href>{https://code.visualstudio.com/download, Visual Studio Code（エディタ）}のインストール ［↓Windwos 7, 8, 10 というアイコンをクリックしてインストーラーをDL，インストール］（※ Visual Studio とは異なるので注意）
+ * 拡張機能のインストール（参考ページ）
+ * Windows 側で Visual Studio Code（以下 vs code）を立ち上げる
+ * 拡張機能の欄で［Remote Development］，[Remote - WSL]と検索してそれぞれインストールする＞
+ * vs code を終了させる
+ * ubuntu を起動させ，［code］と入力してvs code を起動する（最初は少し時間がかかる．これで，WSL にインストールした ubuntu から，windows 側の vs code を起動できるようになった）
+
+@<ami>{ubuntu 編}
+
+
+
 
 以上で，Linux 関係のインストールは終わりです．今後は，windows / ubuntu 共通で話を進めていきます．
 
+==== ssh
+
+ssh のインストールと設定（公開鍵暗号という謎ワードに反応してしまう人は@<href>{こちら, https://knowledge.sakura.ad.jp/3543/}．
+
+ * cd ~
+ * ssh-keygen と入力してEnterすると色々聞いてくるが，Enterで流す．
+ * ls -al ~/.ssh で id_rsa と id_rsa.pub ができてるか確認（id_rsaは決して人に見せない）
+
+==== git/github
+
+「gitとはなんだ？」と思ってしまった迂闊な人はこちら．
+
+	* git のインストール
+
+	* sudo apt update && sudo apt upgrade -y && sudo apt autoremove
+	* sudo apt install git
+	* ssh のインストールと設定（公開鍵暗号という謎ワードに反応してしまう人はこちら）
+
+	* cd ~
+	* ssh-keygen と入力してEnterすると色々聞いてくるが，Enterで流す．
+	* ls -al ~/.ssh で id_rsa と id_rsa.pub ができてるか確認（id_rsaは決して人に見せない）
+	* github にアカウントを作成
+	* github HPに移動
+	* 右上の sing up を選んで必要事項を記入．アカウント種別は無料（free）でOK（なんも難しいことはないと思うが参考ページ）
+	* github に公開鍵を登録
+	* github にログインして右上のメニューから［Settings］を選択
+	* 左柱のメニューから［SSH & GPG keys］を選択
+	* ［SSH key］欄の［New SSH key］を選び
+	* Title欄はなんでもよい（my wsl とか）
+	* key には以下の手順で id_rsa.pub の中身をコピペ
+	* cat ~/.ssh/id_rsa.pub
+	* ↑で画面に文字列が表示されるので，以下のssh-rsa から k-kame@control-kame （これは人によって違う）をマウスで選択して ctrl-c
+	* key 欄にペーストして［Add SSH key］
+
+//image[fig_gitset][fig_gitset]{
+githubの環境設定
+//}
+
+//image[fig_sshset][fig_sshset]{
+sshhubの環境設定
+//}
 
 === ubuntu に ROS をインストール
 
@@ -284,10 +346,170 @@ X の動作試験（X サーバー対応アプリをインストール／実行�
  * 改造の仕方
  * 迷路を解かせよう
 
+
+
+
+
+
+
 == ラズパイマウスを走らせる（シミュレーション編）
 
 === シミュレーション環境のセットアップ
 
+ * @<href>{https://raspimouse-sim-tutorial.gitbook.io/project/introduction, このページ}を順に実施．以下の点をやればよい
+ * はじめに　◀　全部読む
+ * セットアップ
+ * ［ROS Melodic のインストール方法］に従って ROS をインストール
+ * ［Raspberry Pi Mouse Simulator のインストール方法］でシミュレーターをインストール
+ * ［Raspberry Pi Mouse Simulator の動作確認］
+ * ROSのチュートリアル　◀　実行するととても良い
+ * シミュレーターのチュートリアル　◀　Part 4 以外はできるのでやるととても良い
+
 === 迷路を作る
+
+Raspberry Pi Mouse Simulator の迷路を自作する
+
+やること
+	* 
+迷路自作プログラムを組み込む（src/raspimouse_sim）
+	* 
+シミュレーターの迷路を自作する
+	* 
+自作迷路でマウスを走らせる
+
+
+
+迷路自作プログラムの組み込み（初回のみ）
+（PiMouseSimulatorがインストールされ動作する状態で実施のこと）
+
+	* 
+既存リポジトリの削除／差し替え
+
+		* 
+cd ~/catkin_ws/src
+		* 
+rm -rf ./raspimouse_sim
+		* 
+cd ~/catkin_ws
+		* 
+catkin_make
+		* 
+cd ~/catkin_ws/src
+		* 
+git clone http://github.com/k-kame/raspimouse_sim.git
+		* 
+cd ~/catkin_ws
+		* 
+catkin_make
+
+
+
+迷路の自作
+	* 
+迷路データの作成／変更
+
+		* 
+cd ~/catakin_ws/src/raspimouse_sim/raspimouse_gazebo/materials
+		* 
+gen_mousemaze.py の迷路データを編集（※）
+		* 
+迷路を生成
+
+			* 
+./gen_newmaze.sh newmaze
+		* 
+gazebo での表示（チェック）
+
+			* 
+cd ..
+			* 
+x を起動しておく（VcXsrv, X410 など）
+			* 
+gazebo ./worlds/newmaze.world
+
+
+
+自作迷路でマウスを走らせる
+	1. 
+デバイスドライバの生成
+
+		1. 
+ls /dev/rt*（ドライバ設定の確認）
+		2. 
+rosrun raspimouse_control gen_dev_file.sh（ドライバがが無ければ生成）
+	2. 
+迷路の準備とマウスの配置
+
+		1. 
+x server を立てておく（Xsrvの場合はオプション （:0 -ac -multiwindow -reset -terminate -nowgl）をつける）
+		2. 
+roslaunch raspimouse_gazebo raspimouse_with_newmaze.launch
+		3. 
+cat /dev/rtlightsensor0（センサ出力の確認）
+		4. 
+roslaunch raspimouse_sim_tutorial_program raspimouse_sim.launch（"roslaunch raspimouse_ros_2 raspimouse.launch"の置き換え）
+		5. 
+rosservice call /motor_on
+	3. 
+制御プログラムの起動（お好みのものでOK）
+
+		* 
+rosrun raspimouse_sim_tutorial_program left_hand.py
+		* 
+lefthand.py の起動時のポイント
+		* 
+pimouse の配置：src/raspimouse_sim/raspimouse_description/urdf/raspimouse.urdf.xacro のbase footprint が対応パラメーター？
+
+			* 
+  <xacro:base parent="base_footprint">
+			* 
+    <origin xyz="0.10 0.1 0"/>
+			* 
+  </xacro:base>
+			* 
+https://rt-net.jp/mobility/archives/3305
+			* 
+サンプル命令：rosrun gazebo_ros spawn_model -file `rospack find raspimouse_description`/robots/raspimouse.urdf -urdf -x 0 -y 0 -z 1 -model raspimouse
+
+
+
+備考
+	* 
+迷路設定ファイルの場所：~/catkin_ws/src/raspimouse_sim/raspimouse_gazebo/materials
+	* 
+壁データの作成（samplemaze.wall.xacro）
+	* 
+壁を呼び出すファイル（sample_maze_world.xacro）
+	* 
+worldファイルに変化するスクリプト（gen_maze.sh）
+
+
+
+ーーーーー
+※迷路データ（gen_mousemaze.py）の編集方法
+
+テキストエディタで以下の変数を編集するだけ
+	* 
+迷路サイズ：sizeX, sizeY
+
+		* 
+素直に迷路サイズを入れる（正方以外作ったことが無いが多分任意サイズ）
+	* 
+しきり板の箇所：mazeH, mazeV
+
+		* 
+それぞれ「横板」，「縦板」の有無を示す行列
+		* 
+0 / 1 はそのマスのしきり板の有無を示す，mazeHだと下側，mazeVだと左側
+		* 
+sizeX, sizeY = 16, 16 なのに行列が 17x17なのは，一番上と一番右の外壁を表示するため
+
+
+//image[fig_mazeex][fig_mazeex]{
+迷路のサンプル
+//}
+
+
+
 
 == 総合演習：シミュレーションと実機で同じ制御プログラムを走らせる
