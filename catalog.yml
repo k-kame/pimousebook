@@ -1,9 +1,11 @@
 PREDEF:
   - preface.re
 CHAPS:
-  - pimousebook.re
-  - file2.re
-  - file3.re
+  - devsys_concept.re
+  - devsys_setup.re
+  - mouse_real.re
+  - mouse_simulation.re
+  - mouse_total.re
 
 APPENDIX:
 
