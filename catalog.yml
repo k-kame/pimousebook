@@ -2,7 +2,11 @@ PREDEF:
   - preface.re
 CHAPS:
   - devsys_concept.re
-  - devsys_setup.re
+  - devsys_win.re
+  - devsys_ubuntu.re
+  - devsys_raspi.re
+  - software_setup.re
+  - ros_setup.re
   - mouse_real.re
   - mouse_simulation.re
   - mouse_total.re
