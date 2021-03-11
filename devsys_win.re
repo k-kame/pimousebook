@@ -1,56 +1,67 @@
-= 開発 PC（windows 10）上に ubuntu 環境を構築（WSL/ubuntu/X window system）
+= 開発用 PC の設定（windows 10 上に Ubuntu 環境を構築）
+== 前提条件の確認／事前作業
+本節では，windows 10 PC で Ubuntu PC と同じ作業ができるようにします．
 
-本節では，OS が windows 10 の PC に，ubuntu をインストールし，ubuntu PC と同じ作業ができるようにします．
+作業は，以下3つのソフトウェアのインストールに分けることができます．
 
-作業は，windows subsystem for Linux (WSL) のインストールと，ubuntu のインストールに分けることができます．ここで，WSL とは，仮想化技術により，windows から Linux を利用するためのしくみであり，その上に ubuntu 以外の Linux distribution もインストールすることができます．
+ 1. Windows Subsystem for Linux (WSL)@<fn>{wsl} 
+ 1. Ubuntu
+ 1. X windows system@<fn>{xwin}
 
-では，早速作業をすすめていきましょう．
+//footnote[wsl][仮想化技術により windows から Linux を利用するための仕組み．Ubuntu 以外の Linux もインストールできます]
+//footnote[xwin][Linux で windows のようなマウス操作を実現するための基本ソフトウェア]
 
-その前に，以下の前提条件と事前作業を済ませておきましょう．
+では，早速作業をすすめ・・・る前に，前提条件の確認と，事前作業を済ませておきましょう．
 
 @<ami>{前提条件}
- * Windows 10 64bit 入りPC（できればメモリ16GB，できればCore i7，GPUはなくても多分OK）
- * ubuntu 18.04 インストールPCを使う人は，「windows環境の整備」，「ubuntu環境の整備」を飛ばす
- * 消えたら困るデータはバックアップを取っておく（あるいは無料のクラウドストレージ（google drive, one drive など）に入れておく）
- * Windows のアップデート
- * ［設定＞更新とセキュリティ］で windows のバージョンを1909まで上げておく（［設定＞システム＞バージョン情報］で確認できる）
+ * Windows 10 64bit 入りPC（できればメモリ16GB／できればCore i7／独立 GPU は無くても多分OK）
 
-== WSLのインストール
+@<ami>{事前作業}
+ * データのバックアップ（ google drive, one drive などのクラウドストレージを利用 ）
+ * Windows のアップデート：［設定]＞[更新とセキュリティ］で windows のバージョンを 1909 以上に上げておく（［設定＞システム＞バージョン情報］で確認できる）
+
+== WSL のインストール
 
 以下の，マイクロソフトのドキュメントに従って，WSLをインストールします．
- * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/, （読み物）Windows Subsystem for Linux に関するドキュメント}
- * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/install-win10, （こちらの「手動インストールの手順」の手順 1 を実行）Windows 10 用 Windows Subsystem for Linux のインストール ガイド}
+
+ * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/, WSL に関するドキュメント}（読み物）
+ * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/install-win10, Windows 10 用 Windows Subsystem for Linux のインストール ガイド}の「手動インストールの手順」の手順 1 を実行
 
 実行上の注意点：
+
  * powershell の起動：winキーを左クリックして出るメニューの［ファイル名を指定して実行］で，powershell と書けば立ち上がる．
  * powershellの管理者権限への変更：立ち上げ後，以下のコマンドを入力
  ** @<code>{Start-Process powershell.exe -Verb runas}
- * WSL にはバージョン 1, 2 がありますが，使用するのは WSL 1 ですので，手順 1 で終了して 「ubuntu のインストール」に進んでください．WSL 2 までインストールした場合は，以下のコマンドで，バージョンを 1 に設定しておいてください．
+ * WSL には WSL1 と WSL2（バージョン違い）がありますが，使用するのは WSL1 です．手順 1 で終了して 「Ubuntu のインストール」に進んでください．WSL2 までインストールした場合は，以下のコマンドで，バージョンを WSL1 に設定してください．
  ** @<code>{wsl --set-version 1}
 
-== ubuntu のインストール
+== Ubuntu のインストール
 
-以下の，マイクロソフトのドキュメントに従って，ubuntu をインストールします．バージョンが選べますが，ここでは 20.04 LTS を選びます（ubuntu の バージョンに対応する ROS のバージョンが異なります）．
+マイクロソフトのドキュメントに従って，Ubuntu をインストールします．
+バージョンが選べますが，ここでは 20.04 LTS を選びます（Ubuntu の バージョンに対応する ROS のバージョンが異なります）．
+
  * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/install-win10, （こちらの「手動インストールの手順」の手順 6 を実行）Windows 10 用 Windows Subsystem for Linux のインストール ガイド}
- * ubuntu のインストールが終わったら，以下のコマンドで，package を最新にしておきましょう（結構時間がかかります）．
+ * Ubuntu のインストールが終わったら，以下のコマンドで package を最新にしておきましょう（結構時間がかかります）．
  ** @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  
-//image[fig_ubuntuex][fig_ubuntuex]{
-ubuntu のアイコン
+//image[fig_Ubuntuex][fig_Ubuntuex]{
+Ubuntu のアイコン
 //}
 
 == X Window System のインストール
 
-X Window System（以下，X 或いは X11）とは，UNIX 系 OS で標準的に用いられるウィンドウシステムです．簡単に言うと，UNIX 系 OS を windows みたく「複数のウィンドウをマウスで操作」という操作形態を実現するために必要なシステムソフトウェアです．
+X Window System（以下 X あるいは X11）とは，UNIX 系 OS で標準的に用いられるウィンドウシステムです．簡単に言うと，UNIX 系 OS で，「複数のウィンドウをマウスで操作」という Windows のような操作を実現するためのシステムソフトウェアです．
 
-つまり，素の Linux では，コマンドラインで使うソフトウェアしか使うことができません．一方で，ROS にはマウス操作が必要なアプリ（rqt など）も含まれますので，これを使うために，X をインストールします．
+つまり，素の Linux では，コマンドで使うソフトウェアしか使うことができません．一方で，ROS にはマウスを使うアプリ（rqt など）も含まれますので X が必要となります．
 
-X の機能を提供するソフトウェアを「X サーバー」といい，幾つかの種類があります．著者も大してわかっていないので，ここでは，無償／有償の観点から 2 種類を取り上げます（@<table>{list_x}）．結論から言うと，X410 を安売りの時に買うのが，楽で安定していると思います（定価 5,850 円だが，かなりの頻度で1,000 円ぐらいで安売りしている）．
+X の機能を提供するソフトウェアを「X サーバー」といい，幾つかの種類があります．
+ここでは，無償／有償の観点から 2 種類を取り上げます（@<table>{list_x}）．結論から言うと，X410 を安売りの時に買うのが，楽で安定していると思います（定価 5,850 円だが，かなりの頻度で1,000 円ぐらいで安売りしている）．
 
-//table[list_x][windows 用 X サーバー一覧]{
-ソフトウェア	概要
-X410		Microsoft Store で販売されている有償の X サーバー 
-VcXsrc		フリーの X サーバー 
+//table[list_x][Windows 用 X サーバー一覧]{
+ソフトウェア	概要	備考
+----------
+X410		（有償）	Microsoft Store で販売されている X サーバー 
+VcXsrc		（無償）	
 //}
 
 X410のインストール／利用方法
@@ -79,7 +90,7 @@ X を使うための設定
  ** source ~/.bashrc
 
 X の動作試験（X サーバー対応アプリをインストール／実行）
- * ターミナル（ubuntu）を起動
+ * ターミナル（Ubuntu）を起動
  * @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  * @<code>{sudo apt install x11-apps}
  * @<code>{xeyes}
