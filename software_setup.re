@@ -1,23 +1,37 @@
-= 関連するソフトウェアのインストール
+= 開発用ソフトのインストール
 
-== Visual Studio Code のインストール
+//lead{
+本章では，エディタやソースコード管理ソフトなど，開発に使うソフトウェアのインストールについて説明します．ただし，開発マシンの種類（ Windows + Ubuntu / Ubuntu / Raspberry Pi OS ) で異なる場合があります．異なる場合は「〇〇編」のように分けて記載しています．
+//}
 
-@<ami>{windows 編}
+== Visual Studio Code
+
+@<ami>{（インストール）Windows 編}
 　
  * @<href>{https://code.visualstudio.com/download, Visual Studio Code（エディタ）}のインストール ［↓Windwos 7, 8, 10 というアイコンをクリックしてインストーラーをDL，インストール］（※ Visual Studio とは異なるので注意）
+
+
+@<ami>{（インストール）ubuntu 編}
+
+ * ubuntu
+
+@<ami>{（インストール）Raspberry Pi OS 編}
+
+ * Visual Studio Code：[メインメニュー] > [Recommended Software] から探してインストール．
+
+@<ami>{（設定）共通}
+
  * 拡張機能のインストール（参考ページ）
  * Windows 側で Visual Studio Code（以下 vs code）を立ち上げる
  * 拡張機能の欄で［Remote Development］，[Remote - WSL]と検索してそれぞれインストールする＞
  * vs code を終了させる
  * ubuntu を起動させ，［code］と入力してvs code を起動する（最初は少し時間がかかる．これで，WSL にインストールした ubuntu から，windows 側の vs code を起動できるようになった）
 
-@<ami>{ubuntu 編}
-
-
-
 以上で，Linux 関係のインストールは終わりです．今後は，windows / ubuntu 共通で話を進めていきます．
 
 == ssh
+
+コンピュータにネットワーク超しにログインするためのツール
 
 ssh のインストールと設定（公開鍵暗号という謎ワードに反応してしまう人は@<href>{こちら, https://knowledge.sakura.ad.jp/3543/}．
 
@@ -59,3 +73,10 @@ githubの環境設定
 //image[fig_sshset][fig_sshset]{
 sshhubの環境設定
 //}
+
+== screen
+
+ * LXTerminal（黒い画面）で，screen @<fn>{app_screen} というアプリをインストールしておくと，一枚の画面で複数作業を実行できて便利なのでお薦め．
+ ** インストール：@<code>{sudo apt install screen}
+
+//footnote[app_screen][使い方は適当にググってください．この辺のアプリになると，Ubuntu でも CentOS でもはたまた mac でも同じです．例えば@<href>{https://bacchi.me/linux/how-2-use-screen/, このページ}]

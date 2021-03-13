@@ -1,4 +1,4 @@
-= 開発用 PC の設定（windows 10 上に Ubuntu 環境を構築）
+= 開発用マシンの設定（PC + windows 10 + Ubuntu）
 == 前提条件の確認／事前作業
 本節では，windows 10 PC で Ubuntu PC と同じ作業ができるようにします．
 
@@ -49,6 +49,7 @@ Ubuntu のアイコン
 //}
 
 == X Window System のインストール
+=== X Window System とは
 
 X Window System（以下 X あるいは X11）とは，UNIX 系 OS で標準的に用いられるウィンドウシステムです．簡単に言うと，UNIX 系 OS で，「複数のウィンドウをマウスで操作」という Windows のような操作を実現するためのシステムソフトウェアです．
 
@@ -58,40 +59,59 @@ X の機能を提供するソフトウェアを「X サーバー」といい，�
 ここでは，無償／有償の観点から 2 種類を取り上げます（@<table>{list_x}）．結論から言うと，X410 を安売りの時に買うのが，楽で安定していると思います（定価 5,850 円だが，かなりの頻度で1,000 円ぐらいで安売りしている）．
 
 //table[list_x][Windows 用 X サーバー一覧]{
-ソフトウェア	概要	備考
+ソフトウェア		メリット／デメリット					備考
 ----------
-X410		（有償）	Microsoft Store で販売されている X サーバー 
-VcXsrc		（無償）	
+（有償）X410		導入・起動が楽．安定している／有償		MS ストアで販売 
+（無償）VcXsrc		無償／起動時にひと手間必要．時々謎の挙動をする
 //}
 
-X410のインストール／利用方法
+どちらを使うか決めたら，早速インストール作業を始めます．
+
+まず，インストール前に，以下の設定をしておきます（共通）．作業内容は以下の通りです
+
+ * エディタで ~/.bashrc（bashの設定ファイル）を編集して，一番下に環境変数 DISPLAY を追加（以下の内容）．
+
+@<code>{export DISPLAY=localhost:0.0}
+
+上の説明は，Linux 初心者の人には意味不明だと思いますので，補足します．
+
+@<ami>{よくわからない人のための補足説明}
+
+ * .bashrc は，bash というシェル（shell）の設定ファイルです．
+ * シェルとは，コマンドを入力するための黒い画面の事です．興味のある人は@<href>{https://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%AB, こちら}．@<href>{https://www.ohmsha.co.jp/book/9784274064067/, この本も読もう}．
+ * ~ は，ホームディレクトリの事です（自分用設定ファイルやデータファイルを置くフォルダ）．つまり ~/.bashrc とは，自分専用の bash の設定ファイルです．
+ * 編集にはエディタを使います（windows のメモ帳のようなもの）．Linux では vim がよく使われますが，vim は操作が特殊なので初心者には拷問です．（@<href>{https://vim.rtorr.com/lang/ja, vim cheat sheat}でググって下さい（リンク先は一例））．ですので，この冊子では，メモ帳っぽい nano というエディタを使います（逃げない素敵な人は頑張ってください．今逃げても決して逃れられませんし）．
+
+@<ami>{nano エディタによる .bashrc の編集}
+
+ * nano のインストール： @<code>{sudo apt install nano}
+ * ファイルを開く： @<code>{nano ~/.bashrc}
+ * 一番下に以下を追加： @<code>{export DISPLAY=localhost:0.0}
+ * nano を終了（保存すること）：^x （CTRL を押しながら x．その後，保存するか聞いてくるので y）
+ * 設定を反映させる：@<code>{source ~/.bashrc}
+
+以上の設定を終えたら，2.4.2, 2.4.3 のいずれかに進んでください．
+
+=== X410 のインストール／利用方法
 
  * インストール
  ** Microsoft store でポチるだけ．
  * 利用方法
  ** アイコンをクリックするだけ（一般的な windows アプリと同じ）
 
-VcXsrcのインストール／利用方法
+=== VcXsrc のインストール／利用方法
 
  * インストール
- ** @<href>{https://www.atmarkit.co.jp/ait/articles/1812/06/news040.html, WSL上にXサーバをインストールしてGUIを実現する（VcXsrv編）}
+ ** @<href>{https://www.atmarkit.co.jp/ait/articles/1812/06/news040.html, WSL上にXサーバをインストールしてGUIを実現する（VcXsrv編）}を参照．
  * 利用方法 
  ** [スタートメニュー] から [VcXsrv] > [XLaunch] を起動
  ** 起動過程で，基本［次へ (N)＞］を押していればいいが，Extra settings ページの［Additional parameters for VcXsrc］には［:0 -ac -multiwindow -reset -terminate -nowgl］と入力
  
-X を使うための設定
+=== X の動作試験（X サーバー対応アプリをインストール／実行）
 
- * ~/.bashrc （bashの設定ファイル）に設定を追加（bashはshellの一種．シェルに疑問を持った粗忽者はこちら．~ は home directory の意（=/home/ユーザー名））
- * vi ~/.bashrc   （vi はエディタ．代わりに nano ~/.bashrc でもよい．だが vim は避けて通れない道）
- * 以下を最後の行に追加・保存
- ** export DISPLAY=localhost:0.0
- ** export GAZEBO_IP=127.0.0.1
- ** export LIBGL_ALWAYS_INDIRECT=0
- ** source ~/.bashrc
-
-X の動作試験（X サーバー対応アプリをインストール／実行）
  * ターミナル（Ubuntu）を起動
  * @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  * @<code>{sudo apt install x11-apps}
  * @<code>{xeyes}
-目玉がでたらOK
+
+以上の作業で，マウスを追いかける目玉が表示されれば OK．

@@ -27,3 +27,5 @@
  * ROS（Robot Operating System）とは：ロボット用ソフトウェアの開発を支援するライブラリとツールを提供するミドルウェア．主にLinux上で動作する（ @<href>{http://wiki.ros.org/ja, ROS.org} 参照 ）．
  * Linux：Linux は Linux です（ 参考：@<href>{https://ja.wikipedia.org/wiki/Linux,Wikipedia} ）．
 
+
+個々の技術や手順については，すぐれた書物が出ているので，それらをつなぎ合わせて目的を達成できるように導くことが本書のねらい．
