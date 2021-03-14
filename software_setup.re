@@ -7,7 +7,7 @@
 == Visual Studio Code
 
 @<ami>{（インストール）Windows 編}
-　
+
  * @<href>{https://code.visualstudio.com/download, Visual Studio Code（エディタ）}のインストール ［↓Windwos 7, 8, 10 というアイコンをクリックしてインストーラーをDL，インストール］（※ Visual Studio とは異なるので注意）
 
 
@@ -31,28 +31,36 @@
 
 == ssh
 
-コンピュータにネットワーク超しにログインするためのツール
+コンピュータにネットワーク超しにログインするためのツール．公開鍵暗号という謎ワードに反応してしまう人は@<href>{こちら, https://knowledge.sakura.ad.jp/3543/}．
 
-ssh のインストールと設定（公開鍵暗号という謎ワードに反応してしまう人は@<href>{こちら, https://knowledge.sakura.ad.jp/3543/}．
+@<ami>{（インストール）Ubuntu 編}
+
+ * openssh の存在の確認
+ * 必要ならインストール
+
+@<ami>{（インストール）Raspberry Pi OS 編}
+
+ * ssh の設定：最初からインストールされていますが，外からの接続が許可されていないので，[メインメニュー] > [Raspberry Pi の設定] の [システムタブ] で自動ログインを無効に，[インターフェースタブ] で ssh を有効にしておく．
+
+@<ami>{（設定）共通}
 
  * cd ~
  * ssh-keygen と入力してEnterすると色々聞いてくるが，Enterで流す．
- * ls -al ~/.ssh で id_rsa と id_rsa.pub ができてるか確認（id_rsaは決して人に見せない）
+ * ls -al ~/.ssh で id_rsa と id_rsa.pub というファイルができてるか確認（id_rsaは決して人に見せない）
 
 == git/github
 
-「gitとはなんだ？」と思ってしまった迂闊な人は@<href>{こちら, https://o2project.github.io/steins-git/#chapter0-introduction}．
+「gitとはなんだ？」と思ってしまった迂闊な人は@<href>{https://o2project.github.io/steins-git/#chapter0-introduction, こちら}．
 
-git のインストール
+@<ami>{（インストール）共通}
 
  * @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove}
  * @<code>{sudo apt install git}
 
-ssh のインストールと設定（公開鍵暗号という謎ワードに反応してしまう人はこちら）
+@<ami>{（設定）共通}
 
- * cd ~
- * ssh-keygen と入力してEnterすると色々聞いてくるが，Enterで流す．
- * ls -al ~/.ssh で id_rsa と id_rsa.pub ができてるか確認（id_rsaは決して人に見せない）
+git と github の違いを説明．
+
  * github にアカウントを作成
  * github HPに移動
  * 右上の sing up を選んで必要事項を記入．アカウント種別は無料（free）でOK（なんも難しいことはないと思うが参考ページ）

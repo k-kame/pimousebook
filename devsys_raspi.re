@@ -22,13 +22,13 @@ Raspberry Pi OS（旧 Raspbian）は標準OSで，これに ROS をインスト�
 
  1. 動作確認：micro SD をラズパイに差して起動．
 
-@<ami>{Raspberry Pi OS 独自の設定}
-
- * ssh の設定@<fn>{app_ssh} ：最初からインストールされていますが，外からの接続が許可されていないので，[メインメニュー] > [Raspberry Pi の設定] の [システムタブ] で自動ログインを無効に，[インターフェースタブ] で ssh を有効にしておく．設定については，4.2 章を参照．
-
 == Raspberry Pi OS への ROS インストール（ROSberryPi）
 
-ラズパイ OS への ROS のインストールは，Ubuntu へのそれとは少々手順が異なります．@<href>{http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi, 公式ドキュメント}に従ってインストールしてください．
+ラズパイ OS への ROS のインストールは，Ubuntu へのそれとは少々手順が異なるので，先にやってしまいます（〇章 ROS のインストールは読み飛ばしてください）．@<href>{http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi, 公式ドキュメント}に従ってインストールしてください．
 
+基本的に，インストールされる Linux や ROS のバージョンは公式に従いますが（長いものには巻かれるスタイル），インストール後に確認しておきましょう．確認方法は以下の通りです．
 
+ * @<code>{cat /etc/os-release}
+ * @<code>{printenv | grep ROS}
 
+本書籍の執筆時点では，Raspberry Pi OS のバージョンは，上のコマンドの VERSION 行から 10 buster，ROS のバージョンは，下のコマンドの ROS_DISTRO 行から melodic でした（ubuntu 18.04 に対応した ROS1）．

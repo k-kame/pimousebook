@@ -44,7 +44,7 @@
  * Ubuntu のインストールが終わったら，以下のコマンドで package を最新にしておきましょう（結構時間がかかります）．
  ** @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  
-//image[fig_Ubuntuex][fig_Ubuntuex]{
+//image[fig_ubuntuex][fig_ubuntuex]{
 Ubuntu のアイコン
 //}
 
