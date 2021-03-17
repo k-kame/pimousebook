@@ -97,3 +97,35 @@ Raspberry Pi Mouse Simulator の迷路を自作する
 //image[fig_mazeex][fig_mazeex]{
 迷路のサンプル
 //}
+
+
+@<ami>{シミュレーションの実行方法}
+
+1. バーチャルデバイスのドライバとROSの関連付け
+
+ * @<code>{rosrun raspimouse_control gen_dev_file.sh}
+
+2. x server を立てておく
+
+3. シミュレータ起動（含バーチャルデバイスのノード起動）
+
+ * @<code>{roslaunch raspimouse_gazebo raspimouse_with_newmaze.launch}
+
+4. センサ値受信チェック
+
+ * @<code>{cat /dev/rtlightsensor0}
+
+5. モータ通電
+
+ * @<code>{roslaunch raspimouse_ros_2 raspimouse.launch}
+ * @<code>{rosservice call /motor_on}
+
+7. 走行プログラム実行
+
+ * @<code>{roslaunch pimouse_sim_act raspimouse_sim.launch}
+
+
+-----
+
+5がポイント．実機用のpythonで書いたサブスクライバなので，7の制御プログラムがシミュレーションと実機で共通・・・になる気がする（未確認．さらに，もちろん実機用のlaunch
+を書かなければならない）

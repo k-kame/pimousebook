@@ -1,20 +1,16 @@
 = ラズパイマウスを走らせる（実機編）
-
 == マウス制御プログラム開発の準備
 
  * ROS初期設定（ワークスペースの準備）
  * github からリポジトリをクローン
 
-//table[list_repository][関連リポジトリ]{
-リポジトリ名	役割
+//table[list_repo][リポジトリ一覧]{
+No.	リポジトリ名			役割											実機	シミュ
 ----------
-pimouse_sim_act			メイン
-pimouse_ros				？？
-pimouse_run_corridor	？？
-raspimouse_ros			？？
-raspimouse_ros_2		？？
-raspimouse_sim			？？
-raspimouse_sim_tutorial_program
+1	pimouse_sim_act			launch main node/ 								o		o
+2	pimouse_ros				launch buzzer, lightsensors, motors nodes		o		-
+3	raspimouse_ros_2		仮想モーター									-		o
+4	raspimouse_sim			シミュレーション環境							-		o
 //}
 
 == プログラムの説明
@@ -24,12 +20,32 @@ raspimouse_sim_tutorial_program
  * 迷路を解かせよう
 
 
+@<ami>{マウスの実行方法}
+
+ * roslaunch pimouse_sim_act raspimouse_act.launch
+
+
+#@# =========================
+├── pimouse_sim_act
+│   ├── CMakeLists.txt
+│   ├── howtouse.txt
+│   ├── launch
+│   │   ├── raspimouse_act.launch			◀
+│   │   └── raspimouse_sim.launch			◀
+│   ├── package.xml
+│   ├── pimouse_sim_act.code-workspace
+│   └── scripts
+│       ├── left_hand3.py					◀◀ from raspimouse_act/sim.launch
+│       ├── left_hand.py
+│       ├── pimouse_sim_run.py
+│       └── wall_around.py
+#@# =========================
 ├── pimouse_ros
 │   ├── action
 │   │   └── Music.action
 │   ├── CMakeLists.txt
 │   ├── launch
-│   │   ├── pimouse.launch
+│   │   ├── pimouse.launch					◀◀ from raspimouse_act.launch
 │   │   └── test.launch
 │   ├── LICENSE
 │   ├── msg
@@ -42,13 +58,13 @@ raspimouse_sim_tutorial_program
 │   │   ├── buzzer2.py
 │   │   ├── buzzer3.py
 │   │   ├── buzzer4.py
-│   │   ├── buzzer.py
+│   │   ├── buzzer.py						◀◀◀ from pimouse.launch
 │   │   ├── lightsensors1.py
 │   │   ├── lightsensors2.py
-│   │   ├── lightsensors.py
+│   │   ├── lightsensors.py					◀◀◀ from pimouse.launch
 │   │   ├── motors1.py
 │   │   ├── motors2.py
-│   │   └── motors.py
+│   │   └── motors.py						◀◀◀ from pimouse.launch
 │   ├── srv
 │   │   └── TimedMotion.srv
 │   └── test
@@ -60,6 +76,7 @@ raspimouse_sim_tutorial_program
 │       ├── travis_test_motors1.py
 │       ├── travis_test_motors2.py
 │       └── travis_test_motors.py
+#@# =========================（不要？）
 ├── pimouse_run_corridor
 │   ├── CMakeLists.txt
 │   ├── launch
@@ -82,19 +99,7 @@ raspimouse_sim_tutorial_program
 │       ├── travis_test_wall_stop_accel.py
 │       ├── travis_test_wall_stop.py
 │       └── travis_test_wall_trace.py
-├── pimouse_sim_act
-│   ├── CMakeLists.txt
-│   ├── howtouse.txt
-│   ├── launch
-│   │   ├── raspimouse_act.launch
-│   │   └── raspimouse_sim.launch
-│   ├── package.xml
-│   ├── pimouse_sim_act.code-workspace
-│   └── scripts
-│       ├── left_hand3.py
-│       ├── left_hand.py
-│       ├── pimouse_sim_run.py
-│       └── wall_around.py
+#@# =========================（不要？）
 ├── raspimouse_ros
 │   ├── action
 │   │   └── Music.action
@@ -125,12 +130,13 @@ raspimouse_sim_tutorial_program
 │       ├── switches_output
 │       ├── travis_prepare.bash
 │       └── travis_test.bash
+#@# =========================
 ├── raspimouse_ros_2
 │   ├── action
 │   │   └── Music.action
 │   ├── CMakeLists.txt
 │   ├── launch
-│   │   ├── raspimouse.launch
+│   │   ├── raspimouse.launch				◀ 3. モータ通電（9axis_sensor は呼べてない？）
 │   │   └── test.launch
 │   ├── LICENSE
 │   ├── msg
@@ -141,12 +147,12 @@ raspimouse_sim_tutorial_program
 │   ├── package.xml
 │   ├── README.md
 │   ├── scripts
-│   │   └── buzzer.py
+│   │   └── buzzer.py						◀◀　from raspimouse.launch
 │   ├── src
-│   │   ├── buttons.cpp
-│   │   ├── leds.cpp
-│   │   ├── lightsensors.cpp
-│   │   └── motors.cpp
+│   │   ├── buttons.cpp						◀◀　from raspimouse.launch
+│   │   ├── leds.cpp						◀◀　from raspimouse.launch
+│   │   ├── lightsensors.cpp				◀◀　from raspimouse.launch
+│   │   └── motors.cpp						◀◀　from raspimouse.launch
 │   ├── srv
 │   │   └── TimedMotion.srv
 │   └── test
@@ -158,6 +164,7 @@ raspimouse_sim_tutorial_program
 │       ├── travis_test_motors1.py
 │       ├── travis_test_motors2.py
 │       └── travis_test_motors.py
+#@# =========================
 ├── raspimouse_sim
 │   ├── docs
 │   │   └── images
@@ -169,7 +176,7 @@ raspimouse_sim_tutorial_program
 │   │   ├── config
 │   │   │   └── controller.yaml
 │   │   ├── launch
-│   │   │   └── raspimouse_control.launch
+│   │   │   └── raspimouse_control.launch					◀ 1. バーチャルデバイスのドライバとROSの関連付け
 │   │   ├── misc
 │   │   │   └── ms_sound.wav
 │   │   ├── package.xml
@@ -239,7 +246,7 @@ raspimouse_sim_tutorial_program
 │   │   │   ├── open_emptyworld.launch
 │   │   │   ├── raspimouse_with_emptyworld.launch
 │   │   │   ├── raspimouse_with_gasstand.launch
-│   │   │   └── raspimouse_with_samplemaze.launch
+│   │   │   └── raspimouse_with_samplemaze.launch			◀　2. シミュレータ起動（含バーチャルデバイスのノード起動）
 │   │   ├── materials
 │   │   │   ├── gen_maze.sh
 │   │   │   ├── sample_maze.wall.xacro
