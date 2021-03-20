@@ -1,308 +1,138 @@
 = ラズパイマウスを走らせる（実機編）
-== ROS の基礎とマウス制御プログラム開発の準備
 
-前章までで，ROS までの準備が終わったので，ここからはマウス固有の準備を行っていきます．
+//lead{
+前章までで，ROS のインストールとワークスペースの順義が終わったので，以降はマウス固有の準備を行っていきます．
 また，準備の過程で，ROS を使ったプログラム開発の基礎について説明します．
-
-準備／開発の手順は以下のようになります．
-
- 1. 制御プログラムのダウンロード
- 2. ROS への関係づけ
- 3. DLしたプログラムの改造（＝マウスプログラムの開発）
+//}
 
 == ROS プログラムの構成
 
-ここでは，ROS プログラムの構成（Arduino などのプログラムとの違い）について，カンタンに説明します（かなりはしょります．正しい理解のために，後日書籍を参照してください）．
+ここでは，ROS プログラムの構成（Arduino などのプログラムとの違い）について，カンタンに説明します（かなりはしょります．正しい理解のためには，書籍を参照してください）．
 
 例として，センサ，モータ，コンピュータひとつずつから構成されるシステムを考えます．
 
 @<ami>{Arduino のプログラム}
 
-多くの場合，Arduino のプログラムはひとつのファイルに記載され，記載された命令を順に実行するという形で実行されます．つまり，ひとつのプログラムの中で，「センサ値受信　→　制御入力の計算　→　モータ制御」が繰り返されます．
+多くの場合，Arduino のプログラムはひとつの大きなループを繰り返す形で実行されます（@<img>{fig_comp_arduros} 左）．つまり，ひとつのループの中で，「センサ値受信　→　制御入力の計算　→　モータ制御」が繰り返されます．この方式では，プログラムはひとつのプロセッサ上で動くので，「集中処理」と呼ばれます．
 
 @<ami>{ROS のプログラム}
 
-ROS では，モータ用，センサ用，統括用のプログラムを別々に作り，各プログラム間のやりとりは通信で行う，という風に作ります．
+ROS では，モータ用，センサ用，統括用のプログラムを別々に作り，各プログラム間のやりとりは通信で行う，という風に作ります（（@<img>{fig_comp_arduros}） 右）．この方式では，プログラムは複数のプロセッサ上でも動くことができ，「分散処理」と呼ばれます（ひとつのプロセッサで動かすこともできます）．
+ROS では，個々のプログラムを「ノード」，ノード間のやりとり（通信内容）を「メッセージ」と言います．
+また，1～複数個のノードからなる機能は「パッケージ」としてまとめられ，github などに登録されています．このまとめたものは「リポジトリ」と呼ばれ，github からクローン@<fn>{note_clone}して利用できます．
 
-
-以下に，実機用プログラムに必要な
-
-//table[list_repo][リポジトリ一覧]{
-No.	リポジトリ名			役割											実機	シミュ
-----------
-1	pimouse_sim_act			launch main node/ 								o		o
-2	pimouse_ros				launch buzzer, lightsensors, motors nodes		o		-
-3	raspimouse_ros_2		仮想モーター									-		o
-4	raspimouse_sim			シミュレーション環境							-		o
+//image[fig_comp_arduros][Arduino と ROS のプログラムの比較]{
+開発の全体像
 //}
 
+//footnote[note_clone][github ではリポジトリをダウンロードすることをクローンと言うと思っておいて下さい（嘘 50%）]
 
+@<table>{list_repo}に，実機開発／シミュレーションの改造元になるリポジトリをまとめます．
 
- * ROS初期設定（ワークスペースの準備）
+//table[list_repo][リポジトリ一覧]{
+No.	リポジトリ名			役割									実機	シミュ
+----------
+1	pimouse_sim_act			統合プログラム 			                o		o
+2	pimouse_ros				実機のデバイス@<fn>{note_device}ノード	o		-
+3	raspimouse_ros_2		仮想機のデバイスノード	                -		o
+4	raspimouse_sim			シミュレーション環境	                -		o
+//}
 
- * github からリポジトリをクローン
+//footnote[note_device][デバイス＝ブザー，光センサ，モータ]
 
+== マウス用プログラムの準備（開発機）
 
-== プログラムの説明
+この冊子では，マウスは借りるので，以下の設定がされた micro SD カードが配布されているという前提で話を進めます@<href>{https://www.evernote.com/shard/s26/client/snv?noteGuid=72299e08-8340-4dac-b207-f518c737a301&noteKey=a67d2f5450dd2a7b&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs26%2Fsh%2F72299e08-8340-4dac-b207-f518c737a301%2Fa67d2f5450dd2a7b&title=ROS-Raspi%2B%25E3%2582%25BB%25E3%2583%2583%25E3%2583%2586%25E3%2582%25A3%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25AC%25E3%2582%25A4%25E3%2583%2589, （後日追記）}．
 
- * 走らせてみよう
- * 改造の仕方
- * 迷路を解かせよう
+ 1. Raspberry Pi に ubuntu server のインストール
+ 1. ubuntu の設定
+ 1. ubuntu に ROS をインストール
+ 1. ROS の設定
+ 1. ドライバの設定
 
+各自で行う作業の手順は以下の通りです．
 
-@<ami>{マウスの実行方法}
+@<ami>{github での準備}
 
- * roslaunch pimouse_sim_act raspimouse_act.launch
+ 1. リポジトリの fork
 
+@<ami>{マウスの準備}
 
-#@# =========================
-├── pimouse_sim_act
-│   ├── CMakeLists.txt
-│   ├── howtouse.txt
-│   ├── launch
-│   │   ├── raspimouse_act.launch			◀
-│   │   └── raspimouse_sim.launch			◀
-│   ├── package.xml
-│   ├── pimouse_sim_act.code-workspace
-│   └── scripts
-│       ├── left_hand3.py					◀◀ from raspimouse_act/sim.launch
-│       ├── left_hand.py
-│       ├── pimouse_sim_run.py
-│       └── wall_around.py
-#@# =========================
-├── pimouse_ros
-│   ├── action
-│   │   └── Music.action
-│   ├── CMakeLists.txt
-│   ├── launch
-│   │   ├── pimouse.launch					◀◀ from raspimouse_act.launch
-│   │   └── test.launch
-│   ├── LICENSE
-│   ├── msg
-│   │   ├── LightSensorValues.msg
-│   │   └── MotorFreqs.msg
-│   ├── package.xml
-│   ├── README.md
-│   ├── scripts
-│   │   ├── buzzer1.py
-│   │   ├── buzzer2.py
-│   │   ├── buzzer3.py
-│   │   ├── buzzer4.py
-│   │   ├── buzzer.py						◀◀◀ from pimouse.launch
-│   │   ├── lightsensors1.py
-│   │   ├── lightsensors2.py
-│   │   ├── lightsensors.py					◀◀◀ from pimouse.launch
-│   │   ├── motors1.py
-│   │   ├── motors2.py
-│   │   └── motors.py						◀◀◀ from pimouse.launch
-│   ├── srv
-│   │   └── TimedMotion.srv
-│   └── test
-│       ├── travis_package_make.bash
-│       ├── travis_prepare_dummy_files.bash
-│       ├── travis_ros_install.bash
-│       ├── travis_test_buzzer.py
-│       ├── travis_test_lightsensors.py
-│       ├── travis_test_motors1.py
-│       ├── travis_test_motors2.py
-│       └── travis_test_motors.py
-#@# =========================（不要？）
-├── pimouse_run_corridor
-│   ├── CMakeLists.txt
-│   ├── launch
-│   │   ├── wall_around.launch
-│   │   ├── wall_stop_accel.launch
-│   │   ├── wall_stop.launch
-│   │   └── wall_trace.launch
-│   ├── LICENSE
-│   ├── package.xml
-│   ├── README.md
-│   ├── scripts
-│   │   ├── wall_around.py
-│   │   ├── wall_stop_accel.py
-│   │   ├── wall_stop.py
-│   │   └── wall_trace.py
-│   └── test
-│       ├── travis_package_make.bash
-│       ├── travis_prepare_dummy_files.bash
-│       ├── travis_ros_install.bash
-│       ├── travis_test_wall_stop_accel.py
-│       ├── travis_test_wall_stop.py
-│       └── travis_test_wall_trace.py
-#@# =========================（不要？）
-├── raspimouse_ros
-│   ├── action
-│   │   └── Music.action
-│   ├── CMakeLists.txt
-│   ├── LICENSE
-│   ├── misc
-│   │   ├── keikyu.bash
-│   │   └── keikyu_stop.bash
-│   ├── msg
-│   │   ├── LightSensorValues.msg
-│   │   ├── MotorFreqs.msg
-│   │   └── Switches.msg
-│   ├── package.xml
-│   ├── raspimouse.launch
-│   ├── raspimouse_ns.launch
-│   ├── README.md
-│   ├── scripts
-│   │   ├── check_driver_io.py
-│   │   ├── rtbuzzer.py
-│   │   ├── rtlightsensors.py
-│   │   ├── rtmotor.py
-│   │   └── rtswitches.py
-│   ├── srv
-│   │   ├── PutMotorFreqs.srv
-│   │   └── SwitchMotors.srv
-│   └── test
-│       ├── lightsensors_output
-│       ├── switches_output
-│       ├── travis_prepare.bash
-│       └── travis_test.bash
-#@# =========================
-├── raspimouse_ros_2
-│   ├── action
-│   │   └── Music.action
-│   ├── CMakeLists.txt
-│   ├── launch
-│   │   ├── raspimouse.launch				◀ 3. モータ通電（9axis_sensor は呼べてない？）
-│   │   └── test.launch
-│   ├── LICENSE
-│   ├── msg
-│   │   ├── ButtonValues.msg
-│   │   ├── LedValues.msg
-│   │   ├── LightSensorValues.msg
-│   │   └── MotorFreqs.msg
-│   ├── package.xml
-│   ├── README.md
-│   ├── scripts
-│   │   └── buzzer.py						◀◀　from raspimouse.launch
-│   ├── src
-│   │   ├── buttons.cpp						◀◀　from raspimouse.launch
-│   │   ├── leds.cpp						◀◀　from raspimouse.launch
-│   │   ├── lightsensors.cpp				◀◀　from raspimouse.launch
-│   │   └── motors.cpp						◀◀　from raspimouse.launch
-│   ├── srv
-│   │   └── TimedMotion.srv
-│   └── test
-│       ├── travis_package_make.bash
-│       ├── travis_prepare_dummy_files.bash
-│       ├── travis_ros_install.bash
-│       ├── travis_test_buzzer.py
-│       ├── travis_test_lightsensors.py
-│       ├── travis_test_motors1.py
-│       ├── travis_test_motors2.py
-│       └── travis_test_motors.py
-#@# =========================
-├── raspimouse_sim
-│   ├── docs
-│   │   └── images
-│   │       ├── raspimouse_samplemaze.png
-│   │       └── raspimouse_urg.png
-│   ├── LICENSE
-│   ├── raspimouse_control
-│   │   ├── CMakeLists.txt
-│   │   ├── config
-│   │   │   └── controller.yaml
-│   │   ├── launch
-│   │   │   └── raspimouse_control.launch					◀ 1. バーチャルデバイスのドライバとROSの関連付け
-│   │   ├── misc
-│   │   │   └── ms_sound.wav
-│   │   ├── package.xml
-│   │   └── scripts
-│   │       ├── clean_dev_file.sh
-│   │       ├── controller_vel_publisher.py
-│   │       ├── gen_dev_file.sh
-│   │       ├── virtual_led_sensors.py
-│   │       └── virtual_motors.py
-│   ├── raspimouse_description
-│   │   ├── CMakeLists.txt
-│   │   ├── launch
-│   │   │   ├── config
-│   │   │   │   └── urdf.rviz
-│   │   │   ├── display_urdf.launch
-│   │   │   └── display_xacro.launch
-│   │   ├── meshes
-│   │   │   ├── dae
-│   │   │   │   ├── body
-│   │   │   │   │   ├── RasPiMouse_body.dae
-│   │   │   │   │   ├── RasPiMouse_body-TopPlate.dae
-│   │   │   │   │   ├── RasPiMouse_body-TopPlate-URG.dae
-│   │   │   │   │   └── RasPiMouse_TopPlate.dae
-│   │   │   │   ├── sensor
-│   │   │   │   │   ├── URG_center.dae
-│   │   │   │   │   └── URG.dae
-│   │   │   │   └── wheel
-│   │   │   │       └── RasPiMouse_wheel.dae
-│   │   │   └── stl
-│   │   │       ├── color
-│   │   │       │   ├── RasPiMouse_body_black.stl
-│   │   │       │   ├── RasPiMouse_body_gray.stl
-│   │   │       │   ├── RasPiMouse_body_green.stl
-│   │   │       │   ├── RasPiMouse_body_red.stl
-│   │   │       │   ├── RasPiMouse_wheel_black.stl
-│   │   │       │   └── RasPiMouse_wheel_gray.stl
-│   │   │       ├── RasPiMouse_base-metric.stl
-│   │   │       ├── RasPiMouse_sensor-metric.stl
-│   │   │       ├── RasPiMouse_TopPlate.stl
-│   │   │       ├── RasPiMouse_wheel-metric.stl
-│   │   │       ├── RasPiMouse_wheel-mm.stl
-│   │   │       └── URG-04LX-UG01.stl
-│   │   ├── model.config
-│   │   ├── package.xml
-│   │   └── urdf
-│   │       ├── body
-│   │       │   ├── body.gazebo.xacro
-│   │       │   ├── body.urdf.xacro
-│   │       │   ├── body_urg.gazebo.xacro
-│   │       │   └── body_urg.urdf.xacro
-│   │       ├── raspimouse.urdf
-│   │       ├── raspimouse.urdf.xacro
-│   │       ├── raspimouse_urg.urdf.xacro
-│   │       ├── sensors
-│   │       │   ├── hokuyo.gazebo.xacro.org
-│   │       │   ├── lightsens.gazebo.xacro
-│   │       │   ├── lightsens.urdf.xacro
-│   │       │   ├── lrf.gazebo.xacro
-│   │       │   └── lrf.urdf.xacro
-│   │       └── wheel
-│   │           ├── wheel.gazebo.xacro
-│   │           ├── wheel.transmission.xacro
-│   │           └── wheel.urdf.xacro
-│   ├── raspimouse_gazebo
-│   │   ├── CMakeLists.txt
-│   │   ├── launch
-│   │   │   ├── open_emptyworld.launch
-│   │   │   ├── raspimouse_with_emptyworld.launch
-│   │   │   ├── raspimouse_with_gasstand.launch
-│   │   │   └── raspimouse_with_samplemaze.launch			◀　2. シミュレータ起動（含バーチャルデバイスのノード起動）
-│   │   ├── materials
-│   │   │   ├── gen_maze.sh
-│   │   │   ├── sample_maze.wall.xacro
-│   │   │   └── sample_maze.world.xacro
-│   │   ├── package.xml
-│   │   └── worlds
-│   │       ├── gas_station.world
-│   │       ├── hello.world
-│   │       └── sample_maze.world
-│   ├── raspimouse_sim
-│   │   ├── CMakeLists.txt
-│   │   └── package.xml
-│   ├── README.ja.md
-│   └── README.md
-└── raspimouse_sim_tutorial_program
-    ├── CMakeLists.txt
-    ├── config
-    │   └── gmapping.rviz
-    ├── launch
-    │   └── raspimouse_sim_gmapping.launch
-    ├── map
-    │   ├── sample_map.pgm
-    │   └── sample_map.yaml
-    ├── package.xml
-    ├── README.md
-    └── scripts
-        ├── left_hand.py
-        └── raspimouse_sim_teleop.py
+ 1. マウスの起動
+ 1. ワークスペースの作成
+ 1. リポジトリのクローン／関連付け
 
+以上で準備内容について以下を行います
+
+ 1. DLしたプログラムの改造（＝マウスプログラムの開発（次章））
+ 1. 実行
+
+1. リポジトリの fork
+
+fork とは，他の人のリポジトリを自分のリポジトリにコピーすることです（嘘 50%）．fork することにより，変更履歴を管理したり，変更結果を github 経由で開発機からマウスにコピーしたりできるようにすることです．ここでは，アカウント k-kame のリポジトリ pimouse_sim_act.git を，自分のアカウントにコピーします．
+
+ * ブラウザのアドレス欄に@<href>{https://github.com/k-kame/pimouse_sim_act}と入力
+ * ページ右上の fork ボタンを押す（参考：@<img>{fig_github_fork}）
+
+//image[fig_github_fork][github での fork]
+github での fork
+//
+
+同様に，pimouse_ros.git も fork しておきましょう．
+
+2. マウスの起動
+
+ キーボード，マウス，モニタが必要（ip アドレスを調べるので，リモートの場合にも必要）
+
+ * micro SD を差して起動，ログイン（配布 micro SD では user:ubuntu, pass:fnctcontrol）
+
+3. ワークスペースの作成
+
+ * work_pimouse などの名前で作成 
+
+4. リポジトリのクローン／関連付け
+
+以下の手順で，fork したリポジトリをマウスに clone します．<username> には github のアカウントを入れてください．
+
+ * @<code>{cd ~/<workspacename>/src}
+ * @<code>{git clone http://github.com/<username>/pimouse_sim_act.git}
+ * @<code>{git clone http://github.com/<username>pimouse_ros.git}
+ * @<code>{cd /<workspacename>}
+ * @<code>{catkin_make}
+
+@<ami>{マウスの走らせ方}
+
+以上で準備が終わりました．ベースとなるプログラムには最低限の機能しかなく，まともに走行することすらできません・・・が，確認のために起動してみましょう．
+
+ * @<code>{roslaunch pimouse_sim_act raspimouse_act.launch}
+
+== プログラムの改造
+
+ * ├── pimouse_sim_act
+ *     ├── launch
+ *     │   ├── raspimouse_act.launch
+ *     │   └── raspimouse_sim.launch
+ *     └── scripts
+ *         ├── left_hand3.py
+
+ * ├── pimouse_ros
+
+プログラムの解説／改造のポイント
+
+2種類のファイル
+
+ * .launch：ローンチファイル．必要なファイルをまとめて登録・実行するためのファイル，yaml という形式で書かれている．
+ * .py：phtyon で書かれたファイル．ここではマウス制御プログラム．
+
+実機用／シミュレーション用のローンチファイル．ROS の parameter という機能で，left_hand3.py 内の動作を分岐させ，実機用／シミュレーション用のプログラムを混在させている．本書では改造しない．
+
+ * raspimouse_sim.launch
+ * raspimouse_act.launch
+
+マウス制御プログラム．このファイルだけ編集する
+
+ * left_hand3.py
+
+リポジトリ pimouse_ros はモーターと光センサのノードのために利用している．本書では改造しない．
+
+== 迷路を解かせよう
