@@ -12,6 +12,7 @@
 //footnote[xwin][Linux で windows のようなマウス操作を実現するための基本ソフトウェア．]
 
 では，早速作業をすすめ・・・る前に，前提条件の確認と，事前作業を済ませておきましょう．
+
 @<ami>{前提条件／事前作業}
  * OS が Windows 10 64 bit @<fn>{win64bit}
  * Windows アップデート @<fn>{winver}
