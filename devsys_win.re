@@ -1,6 +1,6 @@
-= 開発用マシンの設定（PC + windows 10 + Ubuntu）
+= 開発機セットアップ（PC + windows 10 + Ubuntu）
 == 前提条件の確認／事前作業
-本節では，windows 10 PC で Ubuntu PC と同じ作業ができるようにします．
+本節のゴールは，「windows 10 PC で Ubuntu PC と同じ作業ができるようにすること」です．
 
 作業は，以下3つのソフトウェアのインストールに分けることができます．
 
@@ -8,21 +8,21 @@
  1. Ubuntu
  1. X windows system@<fn>{xwin}
 
-//footnote[wsl][仮想化技術により windows から Linux を利用するための仕組み．Ubuntu 以外の Linux もインストールできます]
-//footnote[xwin][Linux で windows のようなマウス操作を実現するための基本ソフトウェア]
+//footnote[wsl][仮想化技術により windows から Linux を利用するための仕組み．Ubuntu 以外の Linux も利用できる．]
+//footnote[xwin][Linux で windows のようなマウス操作を実現するための基本ソフトウェア．]
 
 では，早速作業をすすめ・・・る前に，前提条件の確認と，事前作業を済ませておきましょう．
+@<ami>{前提条件／事前作業}
+ * OS が Windows 10 64 bit @<fn>{win64bit}
+ * Windows アップデート @<fn>{winver}
+ * データのバックアップ
 
-@<ami>{前提条件}
- * Windows 10 64bit 入りPC（できればメモリ16GB／できればCore i7／独立 GPU は無くても多分OK）
-
-@<ami>{事前作業}
- * データのバックアップ（ google drive, one drive などのクラウドストレージを利用 ）
- * Windows のアップデート：［設定]＞[更新とセキュリティ］で windows のバージョンを 1909 以上に上げておく（［設定＞システム＞バージョン情報］で確認できる）
+//footnote[win64bit][［スタートメニュー右クリック ▶ システム ▶ 詳細情報］で，［システムの種類］という項目に「64 ビットオペレーティングシステム」と書かれていれば OK．]
+//footnote[winver][［スタートメニュー右クリック ▶ 設定 ▶ 更新とセキュリティ］で Windows のバー ジョンを 1909 以上に上げておく（［設定 ▶ システム ▶ 詳細情報］で，［Windows の仕様］の［バージョン情報］で確認できる）]
 
 == WSL のインストール
 
-以下の，マイクロソフトのドキュメントに従って，WSLをインストールします．
+マイクロソフトのドキュメントに従って，WSLをインストールします．
 
  * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/, WSL に関するドキュメント}（読み物）
  * @<href>{https://docs.microsoft.com/ja-jp/windows/wsl/install-win10, Windows 10 用 Windows Subsystem for Linux のインストール ガイド}の「手動インストールの手順」の手順 1 を実行
@@ -51,12 +51,12 @@ Ubuntu のアイコン
 == X Window System のインストール
 === X Window System とは
 
-X Window System（以下 X あるいは X11）とは，UNIX 系 OS で標準的に用いられるウィンドウシステムです．簡単に言うと，UNIX 系 OS で，「複数のウィンドウをマウスで操作」という Windows のような操作を実現するためのシステムソフトウェアです．
+X Window System（以下 X あるいは X11）とは，UNIX 系 OS で，「複 数のウィンドウをマウスで操作」という Windows のような操作を実現するための基本ソフトウェアです（嘘 50%．真実を知りたい方は@<href>{https://ja.wikipedia.org/wiki/X_Window_System, こちら}）．
 
-つまり，素の Linux では，コマンドで使うソフトウェアしか使うことができません．一方で，ROS にはマウスを使うアプリ（rqt など）も含まれますので X が必要となります．
+つまり，素の Linux では，コマンドで使うソフトウェアしか使うことができません．一方で，ROS にはマウスを使うアプリ（rqt など）も含まれるので X が必要となります．
 
 X の機能を提供するソフトウェアを「X サーバー」といい，幾つかの種類があります．
-ここでは，無償／有償の観点から 2 種類を取り上げます（@<table>{list_x}）．結論から言うと，X410 を安売りの時に買うのが，楽で安定していると思います（定価 5,850 円だが，かなりの頻度で1,000 円ぐらいで安売りしている）．
+ここでは，無償／有償の観点から 2 種類を取り上げます（@<table>{list_x}）．結論から言うと，X410 を安売りの時に買うのが，楽で安定していると思います（定価 5,850 円だが，かなりの頻度で1,000 円ぐらいで安売りしています）．
 
 //table[list_x][Windows 用 X サーバー一覧]{
 ソフトウェア		メリット／デメリット					備考
@@ -79,8 +79,8 @@ X の機能を提供するソフトウェアを「X サーバー」といい，�
 
  * .bashrc は，bash というシェル（shell）の設定ファイルです．
  * シェルとは，コマンドを入力するための黒い画面の事です．興味のある人は@<href>{https://ja.wikipedia.org/wiki/%E3%82%B7%E3%82%A7%E3%83%AB, こちら}．@<href>{https://www.ohmsha.co.jp/book/9784274064067/, この本も読もう}．
- * ~ は，ホームディレクトリの事です（自分用設定ファイルやデータファイルを置くフォルダ）．つまり ~/.bashrc とは，自分専用の bash の設定ファイルです．
- * 編集にはエディタを使います（windows のメモ帳のようなもの）．Linux では vim がよく使われますが，vim は操作が特殊なので初心者には拷問です．（@<href>{https://vim.rtorr.com/lang/ja, vim cheat sheat}でググって下さい（リンク先は一例））．ですので，この冊子では，メモ帳っぽい nano というエディタを使います（逃げない素敵な人は頑張ってください．今逃げても決して逃れられませんし）．
+ * ~ は，ホームディレクトリの事です（設定ファイルやデータファイルを置くフォルダ）．つまり ~/.bashrc とは，自分専用の bash の設定ファイルです．
+ * 編集にはエディタを使います（windows のメモ帳のようなもの）．Linux では vim がよく使われますが，vim は操作が特殊なので初心者には拷問です（@<href>{https://vim.rtorr.com/lang/ja, vim cheat sheat}でググって下さい．リンク先は一例）．ですので，この冊子では，メモ帳っぽい nano というエディタを使います（逃げない人は頑張ってください．今逃げても決して逃れられませんし）．
 
 @<ami>{nano エディタによる .bashrc の編集}
 
@@ -90,12 +90,12 @@ X の機能を提供するソフトウェアを「X サーバー」といい，�
  * nano を終了（保存すること）：^x （CTRL を押しながら x．その後，保存するか聞いてくるので y）
  * 設定を反映させる：@<code>{source ~/.bashrc}
 
-以上の設定を終えたら，2.4.2, 2.4.3 のいずれかに進んでください．
+以上の設定を終えたら，2.4.2, 2.4.3 のいずれかに進んで X をインストー ルし，2.4.4 で動作確認して下さい．
 
 === X410 のインストール／利用方法
 
  * インストール
- ** Microsoft store でポチるだけ．
+ ** @<href>{https://www.microsoft.com/ja-jp/p/x410/9nlp712zmn9q?activetab=pivot:overviewtab, Microsoft store} でポチって金を払うだけ．
  * 利用方法
  ** アイコンをクリックするだけ（一般的な windows アプリと同じ）
 
@@ -105,13 +105,13 @@ X の機能を提供するソフトウェアを「X サーバー」といい，�
  ** @<href>{https://www.atmarkit.co.jp/ait/articles/1812/06/news040.html, WSL上にXサーバをインストールしてGUIを実現する（VcXsrv編）}を参照．
  * 利用方法 
  ** [スタートメニュー] から [VcXsrv] > [XLaunch] を起動
- ** 起動過程で，基本［次へ (N)＞］を押していればいいが，Extra settings ページの［Additional parameters for VcXsrc］には［:0 -ac -multiwindow -reset -terminate -nowgl］と入力
+ ** 起動過程で，基本［次へ (N)＞］を押していればいいが，Extra settings ページの［Additional parameters for VcXsrc］には［:0 -ac -multiwindow -reset -terminate -nowgl］と入力（毎回）．
  
-=== X の動作試験（X サーバー対応アプリをインストール／実行）
+=== X の動作試験（X サーバー対応アプリのインストール／実行）
 
  * ターミナル（Ubuntu）を起動
  * @<code>{sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y}
  * @<code>{sudo apt install x11-apps}
  * @<code>{xeyes}
 
-以上の作業で，マウスを追いかける目玉が表示されれば OK．
+以上の作業で，マウスポインタを追いかける目玉が表示されれば OK（参考：@<href>{https://ja.wikipedia.org/wiki/Xeyes, xeye}）．
