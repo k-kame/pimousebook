@@ -1,21 +1,21 @@
-= 開発用マシンの設定（Rasperry Pi + Raspberry Pi OS + ROS）
+= 開発機セットアップ（Rasperry Pi + Raspberry Pi OS + ROS）
 
 == Raspberry Pi（ラズパイ）に Raspberry Pi OS（ラズパイ OS）をインストールする
 
-Raspberry Pi OS（旧 Raspbian）は標準OSで，これに ROS をインストールして開発マシンにできます．ラズパイには ubuntu もインストールできますが，現時点（20.04 LTS）では Desktop 版がリリースされていないので，ラズパイ OS を前提として話を進めます．20.10 には Desktop 版がありますが，後述の　VS code が標準の方法でインストールできないなどの問題があります．種々の問題を自分で解決できる人は，Ubuntu 20.10 Desktop をインストールするのも良いでしょう．
+Raspberry Pi OS（旧名 Raspbian）はラズパイの標準 OS で，これにROS をインストールして開発機にできます．ラズパイにはUbuntu もインストールできますが，現時点（20.04 LTS）では Desktop 版がリリースされていないので，ラズパイOS を前提として話を進めます．20.10 には Desktop 版がありますが，後述の VS code が標準の方法でインストールできないなどの問題があります．種々の問題を自分で解決できる人は，Ubuntu 20.10 Desktop をインストールするのも良いでしょう．
 
-ラズパイ OS のインストールは以下の手順で行います（注意：Imager のダウンロードから ROS インストール終了まで半日ぐらいかかります）．
+ラズパイOS のインストールは以下の手順で行います．ROS インストールの手順が PC とは異なるので，ここでは ROS のインストールまでやってしまいます．Imager のダウンロードからROS インストール終了まで半日ぐらいかかるので，時間を取って一気にやってしまってください．
 
-@<ami>{準備する物}
+@<ami>{準備物}
 
- * Raspbery Pi 4 B (4GB) および付属物（電源ケーブル，キーボード，マウス，モニタ）
+ * Raspbery Pi 4B および付属物（電源ケーブル，キーボード，マウス，モニタ）
  * micro SD card (8 GB 以上)
  * PC (windows / ubuntu どちらでも)．インターネットに繋がっていること．micro SD が読めること．
 
 @<ami>{Windows / Ubuntu PC での作業}
 
- 1. PC で，@<href>{https://www.raspberrypi.org/, Raspberry Pi 財団 HP} から Raspberry Pi Imager（以下「Imager」）をダウンロード（win 用だと imager_1.5.exe）．
- 1. imager_1.5.exe を実行して Imager をインストール．
+ 1. PC で，@<href>{https://www.raspberrypi.org/, Raspberry Pi 財団 HP} の software タブから Raspberry Pi Imager（以下「Imager」）をダウンロード（win 用だと imager_1.5.exe）．
+ 1. imager_1.5.exe を実行してインストール．
  1. ラズパイ OS のインストール：micro SD が読める状態にして Imager を実行．インストール先とインストール OS を選ぶと，ダウンロードとインストールが始まる． 
 
 @<ami>{Raspberry Pi での作業}

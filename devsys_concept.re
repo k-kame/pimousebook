@@ -48,7 +48,7 @@
  
 さらに，シミュレーションをしないのであれば，PC はその辺に転がって いる i5/8GB ぐらいで十分です．シミュレーション環境も，遅いけど動く（らしい）ので，インストールしてみましょう（便利だと思ったら買えばいいのです買えば）．
  
-また，詳細は次章に記載しますが，Raspberry Pi 4 B を 開発用機として使うことも可能です（シミュレーションは完全に諦めることになりますが）．
+また，詳細は次章に記載しますが，Raspberry Pi 4 B を 開発用機として使うことも可能です（@<table>{dev_raspi}．シミュレーションは完全に諦めることになりますが）．
 
 //table[shoppinglist][必要なものリスト]{
 品名				単価		備考
@@ -56,6 +56,14 @@
 開発用 PC（ノート）	120,000		core i7 / 16GB
 開発用 PC（ノート）	80,000		core i5 / 8GB
 micro SD (32G)		1,000		マウス起動用
+//}
+
+//table[dev_raspi][ラズパイ価格]{
+品名				単価		備考
+---------
+Raspberry Pi 4 B	10,000		スターターキット@<fn>{raspi4kit}			
+キーボード＆マウス@<fn>{kbd}	2,530	Logicool MK240/MK245 NANO（コンボ）
+モバイルモニタ		20,000		HDMI 入力，Full HD 13.3 インチ（cocopar など）
 //}
 
 @<ami>{最後に}
@@ -67,13 +75,6 @@ micro SD (32G)		1,000		マウス起動用
 //footnote[raspi4kit][ 付属機器などの条件は同じ．@<href>{https://jp.rs-online.com/web/p/raspberry-pi/2067510/, RS コンポーネンツ}などで購入可能．]
 //footnote[kbd][ワイヤレスなら bluetooth より USB 2.4 GHz がお薦め（接続が切れる）．]
 
-//table[dev_raspi][ラズパイ価格]{
-品名				単価		備考
----------
-Raspberry Pi 4 B	10,000		スターターキット@<fn>{raspi4kit}			
-キーボード＆マウス@<fn>{kbd}	2,530	Logicool MK240/MK245 NANO（コンボ）
-モバイルモニタ		20,000		HDMI 入力，Full HD 13.3 インチ（cocopar など）
-//}
 
 == 色々な開発環境
 
