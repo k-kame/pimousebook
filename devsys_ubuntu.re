@@ -11,9 +11,10 @@ PC への ubuntu のインストールについては，書籍やWEBページな
  ** @<href>{https://jp.ubuntu.com/, Ubuntu に関する CANONICAL の日本語ページ}
  ** @<href>{https://www.ubuntulinux.jp/, ubuntu Japanese Team}；ubuntu 日本語 Remix を配布しているコミュニティ
 
+WEB 情報だけでインストールする場合には，CANONICAL の@<href>{https://jp.ubuntu.com/download, ダウンロードページ}から Ubuntu Desktop 20.04.2.0 LTS をダウンロードし，その後で表示される@<href>{https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview, インストールに関するヘルプ（英語）}に従うと，比較的スムーズにインストールできると思います．
+
 インストール時の注意点：
 
- * 書籍はあくまで参考です（すぐに ubuntu のバージョンが上がり，そのままでは動かなくなります）
  * Ubuntu には種類があります（Desktop / Server / IoT / Cloud）．よくわからない人は Desktop をインストールしましょう．
- * Ubuntu のバージョンは 20.04 LTS，あるいは 20.10 と記載されます．よくわからない人は 20.04 LTS をインストールしましょう．
+ * Ubuntu のバージョンは 20.04 LTS，あるいは 20.10 と記載されます．よくわからない人は xx.04 LTS をインストールしましょう．
  * 本家と日本語 Rimix は基本的に同じで，デスクトップとして使う場合には問題が無いと思いますが，トラブル回避の観点から，著者は本家版を英語環境で使う事にしています．英語を読む不便さと謎のトラブルが発生する不便さ，どちらを取るかかと思います．
