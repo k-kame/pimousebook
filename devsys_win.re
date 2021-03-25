@@ -115,4 +115,4 @@ X の機能を提供するソフトウェアを「X サーバー」といい，�
  * @<code>{sudo apt install x11-apps}
  * @<code>{xeyes}
 
-以上の作業で，マウスポインタを追いかける目玉が表示されれば OK（参考：@<href>{https://ja.wikipedia.org/wiki/Xeyes, xeye}）．
+マウスポインタを追いかける目玉が表示されれば OK（参考：@<href>{https://ja.wikipedia.org/wiki/Xeyes, xeye}）．
