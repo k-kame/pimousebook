@@ -22,11 +22,11 @@ Raspberry Pi OS（旧名 Raspbian）はラズパイの標準 OS で，これにR
 
  1. 動作確認：micro SD をラズパイに差して起動．
 
-== Raspberry Pi OS への ROS インストール（ROSberryPi）
+== ラズパイOS への ROS インストール（ROSberryPi）
 
 ラズパイ OS への ROS のインストールは，Ubuntu へのそれとは少々手順が異なるので，先にやってしまいます（〇章 ROS のインストールは読み飛ばしてください）．@<href>{http://wiki.ros.org/ROSberryPi/Installing%20ROS%20Melodic%20on%20the%20Raspberry%20Pi, 公式ドキュメント}に従ってインストールしてください．
 
-基本的に，インストールされる Linux や ROS のバージョンは公式に従いますが（長いものには巻かれるスタイル），インストール後に確認しておきましょう．確認方法は以下の通りです．
+Linux と ROS のバージョンは公式に従いますが（長いものには巻かれるスタイル），インストール後に確認しておきましょう．確認方法は以下の通りです．
 
  * @<code>{cat /etc/os-release}
  * @<code>{printenv | grep ROS}
