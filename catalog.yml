@@ -10,6 +10,7 @@ CHAPS:
   - mouse_real.re
   # - mouse_simulation.re
   # - mouse_total.re
+  # - mouse_solvemaze.re 
 
 APPENDIX:
 
