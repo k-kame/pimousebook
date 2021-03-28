@@ -1,79 +1,62 @@
 = プログラムの説明／改造
+== 導入ファイルの構造と実行プロセス
+
+@<chap>{mouse_setup}で導入したファイルは，以下の構成になっています．
 
  * ├── pimouse_sim_act
- *     ├── launch
- *     │   ├── raspimouse_act.launch
- *     │   └── raspimouse_sim.launch
- *     └── scripts
- *         ├── left_hand3.py
-
+ *     　	　	├── launch
+ *     	　	　	│	　	　├── raspimouse_act.launch
+ *     	　	　	│	　	　└── raspimouse_sim.launch
+ *     	　	　	└── scripts
+ *     	　	　	　	　	　├── runmouse_base.py
+ * │
  * ├── pimouse_ros
+ * ├── raspimouse_ros_2
+ * ├── raspimouse_sim
 
-プログラムの解説／改造のポイント
+この中で，@<b>{直接編集するファイルは runmouse_base.py だけ}です）．
 
-2種類のファイル
+また，@<b>{実行するファイルは pimouse_sim_act/launch の launch ファイルの2つだけ}で，act が実機用，sim がシミュレーション用の起動ファイルで，どちらも runmouse_base.py を呼び出しています（ROS の parameter という機能で，runmouse_base.py の動作を分岐させています）．
 
- * .launch：ローンチファイル．必要なファイルをまとめて登録・実行するためのファイル，yaml という形式で書かれている．
- * .py：phtyon で書かれたファイル．ここではマウス制御プログラム．
+.launch ファイルとは，実行するファイルや設定を記載し，まとめて実行するためのファイルで，yaml という形式で書かれています．@<list>{raspimouse_act}と@<list>{raspimouse_sim}に，実機用とシミュレーション用の lauch ファイルを示します．
 
-実機用／シミュレーション用のローンチファイル．ROS の parameter という機能で，left_hand3.py 内の動作を分岐させ，実機用／シミュレーション用のプログラムを混在させている．本書では改造しない．
+実行プロセスの観点から，.launch の中身を見てみましょう．
 
- * raspimouse_sim.launch
- * raspimouse_act.launch
+ * 2行目：
+ ** 実機用では別の launch が登録されています．これは，pimouse_ros に含まれるデバイスノードをまとめて実行しています．
+ ** シミュレーション用では空白になっています．これは，シミュレーションではデバイスノードを立ち上げなくて良いのではなく，事前に多数のファイルを実行しなければならず，それらはコマンドを入力して実行しなければならないため，ここでは 3-4 行だけを実行するという方式をとっているためです（詳細は後述）．
+ * 3行目：
+ ** コメントです（実行されません） 
+ * 4行目：
+ ** parameter を設定し，runmouse_base から参照して，実機／シミュレーション時で動作を分岐させています．
+ * 5行目：
+ ** runmouse_base というノード名で，runmouse_base.py を実行しています．ノード名とファイル名は一致していなくても構いません．
 
-マウス制御プログラム．このファイルだけ編集する
-
- * left_hand3.py
-
-リポジトリ pimouse_ros はモーターと光センサのノードのために利用している．本書では改造しない．
-
-== raspimouse_act.launch
-
-//listnum[raspimouse_act][raspimouse_act.launch]{
+//listnum[raspimouse_act][実機用 launch ファイル（raspimouse_act.launch）]{
 <launch>
   <include file="$(find pimouse_ros)/launch/pimouse.launch" />
+  <!-- パラメータ設定（シミュ:0/実機:1） -->
   <param name="sim_act" value="1" />
-  <!-- <node pkg="pimouse_sim_act" name="wall_around" type="wall_around.py" required="true" /> -->
   <node pkg="pimouse_sim_act" name="runmouse_base" type="runmouse_base.py" required="true" />
 </launch>
 //}
 
-== raspimouse_sim.launch
-
-//listnum[raspimouse_sim][raspimouse_sim.launch]{
-<!-- original file: raspimouse_ros_2/launch/raspimouse.launch -->
-
+//listnum[raspimouse_sim][シミュレーション用 launch ファイル（raspimouse_sim.launch）]{
 <launch>
-  <!-- for imu -->
-  <!-- <arg name="imu" default="0" /> -->
-  <!-- <include if="$(arg imu)" file="$(find rt_usb_9axis_sensor)/launch/rt_usb_9axis_sensor.launch" /> -->
 
-  <!-- for real machine -->
-  <!-- <include file="$(find pimouse_ros)/launch/pimouse.launch" /> -->
-  <!-- <node pkg="raspimouse_ros_2" name="buzzer" type="buzzer.py" required="true" /> -->
-
-  <!-- <node pkg="raspimouse_ros_2" name="lightsensors" type="lightsensors" required="true">
-    <param name="frequency" value="10" />
-  </node> -->
-
-  <!-- <arg name="initial_motor_power" default="off" /> -->
-  <!-- <node pkg="raspimouse_ros_2" name="motors" type="motors" required="true" output="screen" args="$(arg initial_motor_power)" /> -->
-
-  <!-- <node pkg="raspimouse_ros_2" name="leds" type="leds" required="true" /> -->
-  <!-- <node pkg="raspimouse_ros_2" name="buttons" type="buttons" required="true" /> -->
-
-  <!-- for simulation -->
-  <!-- <node pkg="raspimouse_sim_tutorial_program" name="LeftHand" type="left_hand.py" required="true" /> -->
   <!-- パラメータ設定（シミュ:0/実機:1） -->
   <param name="sim_act" value="0" />
   <node pkg="pimouse_sim_act" name="runmouse_base" type="runmouse_base.py" required="true" />
-  <!-- <node pkg="pimouse_sim_act" name="LeftHand" type="left_hand3.py" required="true" /> -->
 </launch>
 //}
 
-== runmouse_base.py
+== script ファイルの説明と改造の勘所
 
-//listnum[runmouse_base][runmouse_base.py]{
+@<list>{runmouse_base}に runmouse_base.py を示します．本構成では，このファイルにマウスの制御ルール全てを書く構成になっています．使用言語は python です．
+
+実行プロセス順にファイルを読み，改造ポイントを押さえていきましょう．
+
+//listnum[runmouse_base][マウス制御]{
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
