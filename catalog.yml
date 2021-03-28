@@ -7,6 +7,7 @@ CHAPS:
   - devsys_raspi.re
   - software_setup.re
   - ros_setup.re
+  - mouse_setup.re
   - mouse_real.re
   # - mouse_simulation.re
   # - mouse_total.re
