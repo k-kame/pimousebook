@@ -18,7 +18,7 @@
 
 また，@<b>{実行するファイルは pimouse_sim_act/launch の launch ファイルの2つだけ}で，act が実機用，sim がシミュレーション用の起動ファイルで，どちらも runmouse_base.py を呼び出しています（ROS の parameter という機能で，runmouse_base.py の動作を分岐させています）．
 
-.launch ファイルとは，実行するファイルや設定を記載し，まとめて実行するためのファイルで，yaml という形式で書かれています．@<list>{raspimouse_act}と@<list>{raspimouse_sim}に，実機用とシミュレーション用の lauch ファイルを示します．
+.launch ファイルとは，実行するファイルや設定を記載し，まとめて実行するためのファイルで，yaml という形式で書かれています．@<list>{raspimouse_act}と@<list>{raspimouse_sim}に，実機用とシミュレーション用の lauch を，@<list>{pimouse_ros}に@<list>{raspimouse_act}から呼び出される，モーター／センサノード起動用 launch を示します．
 
 実行プロセスの観点から，.launch の中身を見てみましょう．
 
@@ -50,7 +50,15 @@
 </launch>
 //}
 
-== script ファイルの説明と改造の勘所
+//listnum[pimouse_ros][実機センサ／モーターノード用 launch ファイル（pimouse_ros.launch）]{
+<launch>
+  <node pkg="pimouse_ros" name="buzzer" type="buzzer.py" required="true" />
+  <node pkg="pimouse_ros" name="lightsensors" type="lightsensors.py" required="true" />
+  <node pkg="pimouse_ros" name="motors" type="motors.py" required="true" />
+</launch>
+//}
+
+== runmouse_base.py の構成／実行順と改造の勘所（前半戦）
 
 @<list>{runmouse_base}に runmouse_base.py を示します．本構成では，このファイルにマウスの制御ルール全てを書く構成になっています．使用言語は python です．
 
@@ -115,7 +123,57 @@
 
 10~13 行目は，マウスが1マス進む／90度旋回するために必要な時間を定義する値で，本来ならシミュレーションと実機で違うのですが，サボって同じものを使っています．改造が進んで，別の値を設定する必要が出てきた時点で同じルールで改造して貰えばよいと思います．
 
-では，いよいよ RunMouse を読んでいきましょう．
+== runmouse_base.py の構成／実行順と改造の勘所（後半戦）
+
+では，RunMouse を読んでいきましょう．
+
+本当は，オブジェクト指向とかクラスとかインスタンスとかメンバ関数とか，ややこしい話をしないといけないのですが，ここではウソをつきます（マウスではマルチスレッドとか使わないので・・・．興味がある人は上の用語を Wikipedia とかで調べてみてください）．
+
+まず，131行で RunMouse が呼び出されると（このへんがウソ），32~57行目の __init__(self) が実行されます．ここで，def 関数名 となって字下げされている部分が，一塊の関数です．
+
+ def __init__(self) では，大きく分けて3つの事を行っています．
+
+ * センサ／モーター値をやり取りする方法の設定
+ * シミュレーション／実機用変数の切り替え
+ * シミュレーション環境の初期化（シミュレーションの場合のみ）
+
+では，上から順に説明していきます．
+
+光センサ値の読み取りとモーターの制御は，実機では，raspimouse_act.launch が pimouse.launch 経由で呼び出したノードが実施しています（シミュレーションでは，環境の起動に含まれます）．ので，RunMouse では，これらとの通信方法を設定します．
+
+光センサだと，センサノードが /lightSensors という名前，LightSensorValues という型でデータを送りつけてくるので，その受取口を34行目で作成しています．この，ノード間を行き来するデータを topic といいます（/lightSensors という名前で，型が LightSensorValues の topic ということになります）．
+
+また，sensor_callback は，「受け取ったら sensor_callback という名前の関数に処理させます」という意味です．
+
+なお，データ型 LightSensorValues は 8行目の raspimouse_ros_2 というパッケージ内で定義しています．つまり，8行目は「データ型を使いますよ」という意味だったわけですね（他も使ってますが）．ちなみに，LightSensorValues は，以下6変数を含むデータの塊です．
+
+ * int16 right_forward
+ * int16 right_side
+ * int16 left_side
+ * int16 left_forward
+ * int16 sum_all
+ * int16 sum_forward
+
+36行目：self.sensor_values=LightSensorValues() は，LightSensorValue型の変数（正確にはオブジェクト）sensor_value を作っています．ここに，コールバック関数 sensor_callback で値を読み込みます．
+
+
+モーターについては，「/cmd_vel という名前のノードに Twist 型のデータを送りつけます」という意味です．3つ目の引数 queue_size=1 は，/cmd_vel はメインプログラムからデータを受け取って，
+
+ * 光センサの出力を受け取る口（サブスクライバ）の生成
+ * モーターに命令を出す口（パブリッシャ）の生成
+
+
+という名前でクラスを定義しており，これを元にして，ノードの生成と実行を行っています．
+
+ 1. 131行目： RunMouse ノードの生成
+ 1. 136行目： RunMouse 中の関数 run() を実行
+
+このとき，（１）ノード生成
+
+プログラム本体の最後で呼び出された RunMouse().run()
+
+
+
 
 //listnum[runmouse_base][マウス制御]{
 #!/usr/bin/env python
