@@ -129,6 +129,8 @@
 
 本当は，オブジェクト指向とかクラスとかインスタンスとかメンバ関数とか，ややこしい話をしないといけないのですが，ここではウソをつきます（マウスではマルチスレッドとか使わないので・・・．興味がある人は上の用語を Wikipedia とかで調べてみてください）．
 
+=== RunMouse の初期化
+
 まず，131行で RunMouse が呼び出されると（このへんがウソ），32~57行目の __init__(self) が実行されます．ここで，def 関数名 となって字下げされている部分が，一塊の関数です．
 
  def __init__(self) では，大きく分けて3つの事を行っています．
@@ -145,7 +147,8 @@
 
 また，sensor_callback は，「受け取ったら sensor_callback という名前の関数に処理させます」という意味です．
 
-なお，データ型 LightSensorValues は 8行目の raspimouse_ros_2 というパッケージ内で定義しています．つまり，8行目は「データ型を使いますよ」という意味だったわけですね（他も使ってますが）．ちなみに，LightSensorValues は，以下6変数を含むデータの塊です．
+なお，データ型 LightSensorValues は 8行目の raspimouse_ros_2 というパッケージ内で定義しています．つまり，8行目は「データ型を使いますよ」という意味だったわけですね（他も使ってますが）．
+ちなみに，LightSensorValues 型は，以下の変数を含むデータの塊です．
 
  * int16 right_forward
  * int16 right_side
@@ -154,24 +157,28 @@
  * int16 sum_all
  * int16 sum_forward
 
-36行目：self.sensor_values=LightSensorValues() は，LightSensorValue型の変数（正確にはオブジェクト）sensor_value を作っています．ここに，コールバック関数 sensor_callback で値を読み込みます．
+36行目：self.sensor_values=LightSensorValues() は，LightSensorValue型の変数（正確にはオブジェクト）sensor_value を作っています．コールバック関数 sensor_callback はここに値を読み込みます．
 
+モーターについては，「/cmd_vel という名前で Twist 型のデータを送りつけます」という意味です．
+受け取りについては，pimouse_ros.launch で立ち上げたモーターノードが良しなにやってくれる筈なので，気にしないことにします（気になる人は，pimouse_ros パッケージを読みましょう）．
 
-モーターについては，「/cmd_vel という名前のノードに Twist 型のデータを送りつけます」という意味です．3つ目の引数 queue_size=1 は，/cmd_vel はメインプログラムからデータを受け取って，
+なお，Twist 型は，XZY方向速度と，XZY軸を中心とした旋回速度を表す Vector3 型変数
 
- * 光センサの出力を受け取る口（サブスクライバ）の生成
- * モーターに命令を出す口（パブリッシャ）の生成
+ * Vector3 linear
+ * Vector3 angular
 
+を含みます@<fn>{variabletype}．Vector3 型は，以下のような構成の変数です．
 
-という名前でクラスを定義しており，これを元にして，ノードの生成と実行を行っています．
+//footnote[variabletype][Twist.msg, Vector3.mgs は元から定義されており，/opt/ros/melodic/share/geometry_msgs/ で定義されています．]
 
- 1. 131行目： RunMouse ノードの生成
- 1. 136行目： RunMouse 中の関数 run() を実行
+ * float64 x
+ * float64 y
+ * float64 z
 
-このとき，（１）ノード生成
+41~50行目は前述したように，シミュレーションと実機でのパラメータの切り替えです．
+53~57行目は，シミュレータの初期化なので，いまは触れないことにしましょう．
 
-プログラム本体の最後で呼び出された RunMouse().run()
-
+=== 関数 run()
 
 
 
