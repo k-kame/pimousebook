@@ -82,9 +82,9 @@ fork したプログラムを変更して git で履歴を管理したり，開�
  * ブラウザのアドレス欄に@<href>{https://github.com/k-kame/pimouse_sim_act}と入力
  * ページ右上の fork ボタンを押す（参考：@<img>{fig_github_fork}）
 
-//image[fig_github_fork][github での fork]
+//image[fig_github_fork][github での fork]{
 github での fork
-//
+//}
 
 同様に，リポジトリ 2-4 も fork しておきましょう（3, 4 は実機では使いませんが，システムに組み入れておく必要があります）．
 
