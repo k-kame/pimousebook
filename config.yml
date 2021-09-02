@@ -22,11 +22,14 @@ language: ja
 
 # 書名
 # 読みを入れる例 booktitle: {name: "Re:VIEW EPUBサンプル", file-as: "リビューイーパブサンプル"}
-booktitle: Linux 触ったことない人が ROS を環境構築から始めるための薄い本 with ラズパイマウス
+# booktitle: Linux 触ったことない人が ROS を環境構築から始めるための薄い本 with ラズパイマウス
 
 # 著者名。「, 」で区切って複数指定できる
 # 読みを入れる例 aut: [{name: "青木峰郎", file-as: "アオキミネロウ"}, {name: "武藤健志", file-as: "ムトウケンシ"}, {name: "高橋征義", file-as: "タカハシマサヨシ"}, {name: "角征典", file-as: "カドマサノリ"}]
-aut: ["福井高専ロボットプログラミング勉強会"]
+aut: ["ロボットプログラミング勉強会"]
+
+# タイトルを改行できるようにする
+# coverfile: _cover.html
 
 # 以下はオプション
 # 以下はオプション(autと同じように配列書式で複数指定可能)。
@@ -134,6 +137,8 @@ coverimage: cover.jpg
 #
 # 自動生成される大扉ページを上書きするファイル。ファイル名を指定すると大扉として入る (PDFMaker向けにはLaTeXソース断片、EPUBMaker向けにはHTMLファイル)
 # titlefile: null
+titlefile: _cover.tex
+
 #
 # 原書大扉ページにするファイル。ファイル名を指定すると原書大扉として入る (PDFMaker向けにはLaTeXソース断片、EPUBMaker向けにはHTMLファイル)
 # originaltitlefile: null
